@@ -53,6 +53,8 @@ namespace DarAlQuranLicense
 
 		private List<Student> students;
 
+		private readonly PersianCalendar persianCalendar = new PersianCalendar();
+
 		private bool hasPicture = false;
 
 		public MainForm()
@@ -110,6 +112,14 @@ namespace DarAlQuranLicense
 			if (File.Exists("لیست قرآن آموزان.txt")) studentsListAddress.Text = Path.GetFullPath("لیست قرآن آموزان.txt");
 			if (Directory.Exists("عکس قرآن آموزان")) studentsPicturesAddress.Text = Path.GetFullPath("عکس قرآن آموزان");
 			saveAddress.Text = Path.GetFullPath("گواهینامه ها");
+
+			DateTime now = DateTime.Today;
+
+			date.Text = 
+				(persianCalendar.GetYear(now).ToString() + '/' +
+				persianCalendar.GetMonth(now).ToString() + '/' +
+				persianCalendar.GetDayOfMonth(now))
+				.EnglishNumbersToPersian();
 		}
 
 		private void SetAllControlsFont(Control.ControlCollection ctrls)
@@ -330,7 +340,7 @@ namespace DarAlQuranLicense
 				foreach (Student student in students)
 				{
 					if ((sender == studentName && studentName.Text == student.GetFullName())
-						|| (sender == studentCode && studentCode.Text.ToPersianNumbers() == student.Code.ToPersianNumbers()))
+						|| (sender == studentCode && studentCode.Text.EnglishNumbersToPersian() == student.Code.EnglishNumbersToPersian()))
 					{
 						studentName.Text = student.GetFullName();
 						fatherName.Text = student.FatherName;
@@ -347,7 +357,7 @@ namespace DarAlQuranLicense
 				string path = "";
 				foreach (string file in files)
 				{
-					if (Path.GetFileNameWithoutExtension(file).ToPersianNumbers() == studentCode.Text.ToPersianNumbers())
+					if (Path.GetFileNameWithoutExtension(file).EnglishNumbersToPersian() == studentCode.Text.EnglishNumbersToPersian())
 					{
 						path = file;
 						goto ImageFound;
@@ -416,8 +426,6 @@ namespace DarAlQuranLicense
 
 		private void Generate_Click(object sender, EventArgs e)
 		{
-			message.BackColor = Color.LightBlue;
-			message.Text = "در حال آماده سازی گواهینامه...";
 			generate.Enabled = false;
 			try
 			{
@@ -472,15 +480,15 @@ namespace DarAlQuranLicense
 				}
 				else EmptyFields.Add("دارالقرآن");
 
-				if (number.Text.Length > 0) FitAndDrawString(number.Text.ToPersianNumbers(), BKoodak31, RTL, BlackBrush, ref graphics, 685, 1080 + 13, 300);
+				if (number.Text.Length > 0) FitAndDrawString(number.Text.EnglishNumbersToPersian(), BKoodak31, RTL, BlackBrush, ref graphics, 685, 1080 + 13, 300);
 				else EmptyFields.Add("شماره");
 
 				string monthString, yearString;
 				byte yearDigits = 4;
-				byte month = byte.Parse(date.Text.Split('/')[1]);
+				byte month = byte.Parse(splittedDate[1]);
 				if (!dateCheckBox.Checked) yearDigits = 2;
-				string[] splittedDate = date.Text.ToPersianNumbers().Split('/');
-				FitAndDrawString(splittedDate[0].Substring(4 - yearDigits).ToPersianNumbers() + '/' + splittedDate[1] + '/' + splittedDate[2], BKoodak31, RTL, BlackBrush, ref graphics, 685, 1180 + 13, 300);
+				string[] splittedDate = date.Text.EnglishNumbersToPersian().Split('/');
+				FitAndDrawString(splittedDate[0].Substring(4 - yearDigits).EnglishNumbersToPersian() + '/' + splittedDate[1] + '/' + splittedDate[2], BKoodak31, RTL, BlackBrush, ref graphics, 685, 1180 + 13, 300);
 
 				if (studentName.Text.Length > 0) FitAndDrawString(studentName.Text, IranNastaliq58, RTL, BlackBrush, ref graphics, 1440, 1700 - 5, 525);
 				else EmptyFields.Add("نام قرآن آموز");
@@ -488,7 +496,7 @@ namespace DarAlQuranLicense
 				if (fatherName.Text.Length > 0) FitAndDrawString(fatherName.Text, IranNastaliq58, RTL, BlackBrush, ref graphics, 780, 1700 - 5, 400);
 				else EmptyFields.Add("نام پدر");
 
-				if (studentCode.Text.Length > 0) FitAndDrawString(studentCode.Text.ToPersianNumbers(), IranNastaliq58, RTL, BlackBrush, ref graphics, 1650, 1900 - 5, 400);
+				if (studentCode.Text.Length > 0) FitAndDrawString(studentCode.Text.EnglishNumbersToPersian(), IranNastaliq58, RTL, BlackBrush, ref graphics, 1650, 1900 - 5, 400);
 				else EmptyFields.Add("کد قرآن آموز");
 
 				if (levelRadioButton.Checked)
@@ -499,12 +507,13 @@ namespace DarAlQuranLicense
 				else
 				{
 					FitAndDrawString(":", IranNastaliq58, RTL, new SolidBrush(Color.FromArgb(137, 24, 28)), ref graphics, 1920, 2100 - 5);
-					if (customLicenseText.Text.Length > 0) FitAndDrawString(customLicenseText.Text.ToPersianNumbers(), new Font(IranNastaliq, 77), RTL, new SolidBrush(Color.FromArgb(137, 24, 28)), ref graphics, 1880, 2100 - 45, 800);
+					if (customLicenseText.Text.Length > 0) FitAndDrawString(customLicenseText.Text.EnglishNumbersToPersian(), new Font(IranNastaliq, 77), RTL, new SolidBrush(Color.FromArgb(137, 24, 28)), ref graphics, 1880, 2100 - 45, 800);
 					else EmptyFields.Add("نوع گواهینامه");
 				}
-				if (month < 4) monthString = "بهار";
-				else if (month < 7) monthString = "تابستان ";
-				else if (month < 10) monthString = "پاییز";
+
+				if (month <= 3) monthString = "بهار";
+				else if (month <= 6) monthString = "تابستان ";
+				else if (month <= 9) monthString = "پاییز";
 				else monthString = "زمستان";
 				FitAndDrawString(monthString, IranNastaliq58, RTL, BlackBrush, ref graphics, 1915, 2300 - 5);
 
@@ -512,7 +521,7 @@ namespace DarAlQuranLicense
 				//else yearString = date.Value.ToString(yearFormat) + '-' + date.Value.AddYears(1).ToString(yearFormat);
 				//FitAndDrawString(yearString.ToPersianNumbers(), IranNastaliq58, RTL, BlackBrush, ref graphics, 1410, 2300 - 5);
 
-				if (score.Text.Length > 0) FitAndDrawString(score.Text.ToPersianNumbers(), IranNastaliq58, RTL, BlackBrush, ref graphics, 1925, 2500 - 5, 400);
+				if (score.Text.Length > 0) FitAndDrawString(score.Text.EnglishNumbersToPersian(), IranNastaliq58, RTL, BlackBrush, ref graphics, 1925, 2500 - 5, 400);
 				else EmptyFields.Add("درجه گواهینامه");
 
 				if (darAlQuranManager.Text.Length > 0) FitAndDrawString(darAlQuranManager.Text, BNazanin37, RTLC, BlackBrush, ref graphics, 1845, 2875 - 15, 550);
@@ -553,7 +562,7 @@ namespace DarAlQuranLicense
 				monthString = monthString.Trim();
 				string dir = Path.Combine(saveAddress.Text, splittedDate[2], monthString);
 				if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
-				bitmap.Save(Path.Combine(dir, studentName.Text + "(" + studentCode.Text.ToPersianNumbers() + ").jpg"), ImageFormat.Jpeg);
+				bitmap.Save(Path.Combine(dir, studentName.Text + "(" + studentCode.Text.EnglishNumbersToPersian() + ").jpg"), ImageFormat.Jpeg);
 				message.Text += "گواهینامه با موفقیت ایجاد شد.";
 			}
 			catch (Exception)
@@ -587,10 +596,17 @@ namespace DarAlQuranLicense
 
 	public static class StringExtensions
 	{
-		public static string ToPersianNumbers(this string text)
+		public static string EnglishNumbersToPersian(this string text)
 		{
 			for (int i = 0; i < text.Length; i++) if (text[i] >= '0' && text[i] <= '9')
 					text = text.Replace(text[i], (char)(text[i] + '۰' - '0'));
+			return text;
+		}
+		
+		public static string PersianNumbersToEnglish(this string text)
+		{
+			for (int i = 0; i < text.Length; i++) if (text[i] >= '۰' && text[i] <= '۹')
+					text = text.Replace(text[i], (char)(text[i] + '0' - '۰'));
 			return text;
 		}
 	}
