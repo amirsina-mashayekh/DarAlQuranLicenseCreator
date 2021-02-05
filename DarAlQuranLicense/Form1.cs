@@ -10,7 +10,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Resources;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DarAlQuranLicense
@@ -580,7 +579,7 @@ namespace DarAlQuranLicense
 					}
 				}
 				monthString = monthString.Trim();
-				string dir = Path.Combine(saveAddress.Text, splittedDate[2], monthString);
+				string dir = Path.Combine(saveAddress.Text, date.Text.Split('/')[0].PersianNumbersToEnglish(), monthString);
 				if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 				bitmap.Save(Path.Combine(dir, studentName.Text + "(" + studentCode.Text.EnglishNumbersToPersian() + ").jpg"), ImageFormat.Jpeg);
 				message.Text += "گواهینامه با موفقیت ایجاد شد.";
