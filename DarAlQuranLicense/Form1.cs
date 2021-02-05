@@ -579,7 +579,7 @@ namespace DarAlQuranLicense
 					}
 				}
 				monthString = monthString.Trim();
-				string dir = Path.Combine(saveAddress.Text, date.Text.Split('/')[0].PersianNumbersToEnglish(), monthString);
+				string dir = Path.Combine(saveAddress.Text, date.Text.Split('/')[0].PersianNumbersToEnglish(), monthString, levelRadioButton.Checked ? "سطح " + level.Text : customLicenseText.Text);
 				if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 				bitmap.Save(Path.Combine(dir, studentName.Text + "(" + studentCode.Text.EnglishNumbersToPersian() + ").jpg"), ImageFormat.Jpeg);
 				message.Text += "گواهینامه با موفقیت ایجاد شد.";
