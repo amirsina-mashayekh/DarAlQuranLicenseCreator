@@ -115,11 +115,11 @@ namespace DarAlQuranLicense
 
 			DateTime now = DateTime.Today;
 
-			date.Text = 
-				(persianCalendar.GetYear(now).ToString() + '/' +
+			date.Text = (
+				persianCalendar.GetYear(now).ToString() + '/' +
 				persianCalendar.GetMonth(now).ToString() + '/' +
-				persianCalendar.GetDayOfMonth(now))
-				.EnglishNumbersToPersian();
+				persianCalendar.GetDayOfMonth(now)
+				).EnglishNumbersToPersian();
 		}
 
 		private void SetAllControlsFont(Control.ControlCollection ctrls)
@@ -426,7 +426,6 @@ namespace DarAlQuranLicense
 
 		private void Generate_Click(object sender, EventArgs e)
 		{
-			generate.Enabled = false;
 			try
 			{
 				ResourceManager resourceManager = Properties.Resources.ResourceManager;
@@ -485,10 +484,26 @@ namespace DarAlQuranLicense
 
 				string monthString, yearString;
 				byte yearDigits = 4;
+				string[] splittedDate = date.Text.PersianNumbersToEnglish().Split('/');
+				try
+				{
+					persianCalendar.ToDateTime(
+						int.Parse(splittedDate[0]),
+						int.Parse(splittedDate[1]),
+						int.Parse(splittedDate[2]),
+						0, 0, 0, 0
+						);
+				}
+				catch (Exception)
+				{
+					message.BackColor = Color.IndianRed;
+					message.Text = "تاریخ وارد شده نامعتبر است.";
+					return;
+				}
 				byte month = byte.Parse(splittedDate[1]);
 				if (!dateCheckBox.Checked) yearDigits = 2;
-				string[] splittedDate = date.Text.EnglishNumbersToPersian().Split('/');
-				FitAndDrawString(splittedDate[0].Substring(4 - yearDigits).EnglishNumbersToPersian() + '/' + splittedDate[1] + '/' + splittedDate[2], BKoodak31, RTL, BlackBrush, ref graphics, 685, 1180 + 13, 300);
+				string[] persianSplittedDate = date.Text.EnglishNumbersToPersian().Split('/');
+				FitAndDrawString(persianSplittedDate[0].Substring(4 - yearDigits) + '/' + persianSplittedDate[1] + '/' + persianSplittedDate[2], BKoodak31, RTL, BlackBrush, ref graphics, 685, 1180 + 13, 300);
 
 				if (studentName.Text.Length > 0) FitAndDrawString(studentName.Text, IranNastaliq58, RTL, BlackBrush, ref graphics, 1440, 1700 - 5, 525);
 				else EmptyFields.Add("نام قرآن آموز");
@@ -570,7 +585,6 @@ namespace DarAlQuranLicense
 				message.BackColor = Color.IndianRed;
 				message.Text = "خطا در ایجاد گواهینامه";
 			}
-			generate.Enabled = true;
 		}
 
 		async private void HelpButton_Click(object sender, EventArgs e)
