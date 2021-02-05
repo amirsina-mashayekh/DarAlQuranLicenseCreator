@@ -367,12 +367,12 @@
 			this.dateCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.dateCheckBox.Cursor = System.Windows.Forms.Cursors.Help;
 			this.dateCheckBox.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.dateCheckBox.Location = new System.Drawing.Point(206, 169);
+			this.dateCheckBox.Location = new System.Drawing.Point(243, 169);
 			this.dateCheckBox.Name = "dateCheckBox";
-			this.dateCheckBox.Size = new System.Drawing.Size(249, 26);
+			this.dateCheckBox.Size = new System.Drawing.Size(211, 26);
 			this.dateCheckBox.TabIndex = 8;
-			this.dateCheckBox.Text = "سال به طور کامل (چهار رقمی) درج شود.";
-			this.toolTip.SetToolTip(this.dateCheckBox, "برای مثال ۱۴۰۱ به جای ۰۱");
+			this.dateCheckBox.Text = "سال به صورت دو رقمی درج شود.";
+			this.toolTip.SetToolTip(this.dateCheckBox, "برای مثال ۰۱ به جای ۱۴۰۱");
 			this.dateCheckBox.UseVisualStyleBackColor = true;
 			// 
 			// studentPicture

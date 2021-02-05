@@ -482,8 +482,7 @@ namespace DarAlQuranLicense
 				if (number.Text.Length > 0) FitAndDrawString(number.Text.EnglishNumbersToPersian(), BKoodak31, RTL, BlackBrush, ref graphics, 685, 1080 + 13, 300);
 				else EmptyFields.Add("شماره");
 
-				string monthString, yearString;
-				byte yearDigits = 4;
+				string monthString, academicYear;
 				string[] splittedDate = date.Text.PersianNumbersToEnglish().Split('/');
 				try
 				{
@@ -500,10 +499,15 @@ namespace DarAlQuranLicense
 					message.Text = "تاریخ وارد شده نامعتبر است.";
 					return;
 				}
-				byte month = byte.Parse(splittedDate[1]);
-				if (!dateCheckBox.Checked) yearDigits = 2;
-				string[] persianSplittedDate = date.Text.EnglishNumbersToPersian().Split('/');
-				FitAndDrawString(persianSplittedDate[0].Substring(4 - yearDigits) + '/' + persianSplittedDate[1] + '/' + persianSplittedDate[2], BKoodak31, RTL, BlackBrush, ref graphics, 685, 1180 + 13, 300);
+				string prevYear = (int.Parse(splittedDate[0]) - 1).ToString();
+				string nextYear = (int.Parse(splittedDate[0]) + 1).ToString();
+				if (dateCheckBox.Checked)
+				{
+					splittedDate[0] = splittedDate[0].Substring(splittedDate[0].Length - 2);
+					prevYear = prevYear.Substring(prevYear.Length - 2);
+					nextYear = nextYear.Substring(nextYear.Length - 2);
+				}
+				FitAndDrawString((splittedDate[0] + '/' + splittedDate[1] + '/' + splittedDate[2]).EnglishNumbersToPersian(), BKoodak31, RTL, BlackBrush, ref graphics, 685, 1180 + 13, 300);
 
 				if (studentName.Text.Length > 0) FitAndDrawString(studentName.Text, IranNastaliq58, RTL, BlackBrush, ref graphics, 1440, 1700 - 5, 525);
 				else EmptyFields.Add("نام قرآن آموز");
@@ -526,15 +530,16 @@ namespace DarAlQuranLicense
 					else EmptyFields.Add("نوع گواهینامه");
 				}
 
+				byte month = byte.Parse(splittedDate[1]);
 				if (month <= 3) monthString = "بهار";
 				else if (month <= 6) monthString = "تابستان ";
 				else if (month <= 9) monthString = "پاییز";
 				else monthString = "زمستان";
 				FitAndDrawString(monthString, IranNastaliq58, RTL, BlackBrush, ref graphics, 1915, 2300 - 5);
 
-				//if (month < 7) yearString = date.Value.AddYears(-1).ToString(yearFormat) + '-' + date.Value.ToString(yearFormat);
-				//else yearString = date.Value.ToString(yearFormat) + '-' + date.Value.AddYears(1).ToString(yearFormat);
-				//FitAndDrawString(yearString.ToPersianNumbers(), IranNastaliq58, RTL, BlackBrush, ref graphics, 1410, 2300 - 5);
+				if (month < 7) academicYear = prevYear + '-' + splittedDate[0];
+				else academicYear = splittedDate[0] + '-' + nextYear;
+				FitAndDrawString(academicYear.EnglishNumbersToPersian(), IranNastaliq58, RTL, BlackBrush, ref graphics, 1410, 2300 - 5);
 
 				if (score.Text.Length > 0) FitAndDrawString(score.Text.EnglishNumbersToPersian(), IranNastaliq58, RTL, BlackBrush, ref graphics, 1925, 2500 - 5, 400);
 				else EmptyFields.Add("درجه گواهینامه");
