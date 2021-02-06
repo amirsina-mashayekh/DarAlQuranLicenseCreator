@@ -106,7 +106,6 @@ namespace DarAlQuranLicense
 
 
 			studentPicture.Image = DefaultImage;
-			level.SelectedIndex = 0;
 			score.SelectedIndex = 0;
 			background.SelectedIndex = 0;
 
@@ -440,22 +439,6 @@ namespace DarAlQuranLicense
 			}
 		}
 
-		private void LevelRadioButton_CheckedChanged(object sender, EventArgs e)
-		{
-			if (levelRadioButton.Checked)
-			{
-				level.Enabled = true;
-				customLicenseText.Enabled = false;
-				background.Enabled = false;
-			}
-			else
-			{
-				level.Enabled = false;
-				customLicenseText.Enabled = true;
-				background.Enabled = true;
-			}
-		}
-
 		private void Generate_Click(object sender, EventArgs e)
 		{
 			try
@@ -463,8 +446,7 @@ namespace DarAlQuranLicense
 				ResourceManager resourceManager = Properties.Resources.ResourceManager;
 				string level_background;
 
-				if (levelRadioButton.Checked) level_background = (level.SelectedIndex + 1).ToString();
-				else level_background = (background.SelectedIndex + 1).ToString();
+				level_background = (background.SelectedIndex + 1).ToString();
 
 				Bitmap bitmap = (Bitmap)resourceManager.GetObject("_" + level_background);
 				bitmap.SetResolution(96, 96);
@@ -550,17 +532,10 @@ namespace DarAlQuranLicense
 				if (studentCode.Text.Length > 0) FitAndDrawString(studentCode.Text.EnglishNumbersToPersian(), IranNastaliq58, RTL, BlackBrush, ref graphics, 1650, 1900 - 5, 400);
 				else EmptyFields.Add("کد قرآن آموز");
 
-				if (levelRadioButton.Checked)
-				{
-					FitAndDrawString("گذراندن سطح:", IranNastaliq58, RTL, new SolidBrush(Color.FromArgb(137, 24, 28)), ref graphics, 1920, 2100 - 5);
-					FitAndDrawString("(" + level.SelectedItem + ")", new Font(IranNastaliq, 77), RTL, new SolidBrush(Color.FromArgb(137, 24, 28)), ref graphics, 1600, 2100 - 45);
-				}
-				else
-				{
-					FitAndDrawString(":", IranNastaliq58, RTL, new SolidBrush(Color.FromArgb(137, 24, 28)), ref graphics, 1920, 2100 - 5);
-					if (customLicenseText.Text.Length > 0) FitAndDrawString(customLicenseText.Text.EnglishNumbersToPersian(), new Font(IranNastaliq, 77), RTL, new SolidBrush(Color.FromArgb(137, 24, 28)), ref graphics, 1880, 2100 - 45, 800);
-					else EmptyFields.Add("نوع گواهینامه");
-				}
+				FitAndDrawString(customLicenseText.Text.EnglishNumbersToPersian() + ": ", IranNastaliq58, RTL, new SolidBrush(Color.FromArgb(137, 24, 28)), ref graphics, 1920, 2100 - 5);
+				int cLTWidth = (int)graphics.MeasureString(customLicenseText.Text.EnglishNumbersToPersian() + ": ", IranNastaliq58, int.MaxValue, RTL).Width;
+				if (customLicenseText.Text.Length > 0) FitAndDrawString(licenseText.Text.EnglishNumbersToPersian(), new Font(IranNastaliq, 77), RTL, new SolidBrush(Color.FromArgb(137, 24, 28)), ref graphics, 1880 - cLTWidth, 2100 - 45, 800);
+				else EmptyFields.Add("نوع گواهینامه");
 
 				byte month = byte.Parse(splittedDate[1]);
 				if (month <= 3) monthString = "بهار";
@@ -622,7 +597,7 @@ namespace DarAlQuranLicense
 					}
 				}
 				monthString = monthString.Trim();
-				string dir = Path.Combine("گواهینامه‌ها", date.Text.Split('/')[0].EnglishNumbersToPersian(), monthString, levelRadioButton.Checked ? "سطح " + level.Text : customLicenseText.Text);
+				string dir = Path.Combine("گواهینامه‌ها", date.Text.Split('/')[0].EnglishNumbersToPersian(), monthString, licenseText.Text);
 				if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 				bitmap.Save(Path.Combine(dir, studentName.Text + "(" + studentCode.Text.EnglishNumbersToPersian() + ").jpg"), ImageFormat.Jpeg);
 				message.Text += "گواهینامه با موفقیت ایجاد شد.";

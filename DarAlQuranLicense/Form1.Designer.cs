@@ -53,9 +53,11 @@
 			this.studentPicture = new System.Windows.Forms.PictureBox();
 			this.studentCode = new System.Windows.Forms.TextBox();
 			this.fatherName = new System.Windows.Forms.TextBox();
+			this.licenseText = new System.Windows.Forms.TextBox();
 			this.customLicenseText = new System.Windows.Forms.TextBox();
 			this.score = new System.Windows.Forms.ComboBox();
 			this.studentName = new System.Windows.Forms.ComboBox();
+			this.label7 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
@@ -66,8 +68,6 @@
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.helpButton = new System.Windows.Forms.Button();
 			this.date = new System.Windows.Forms.MaskedTextBox();
-			this.label7 = new System.Windows.Forms.Label();
-			this.licenseText = new System.Windows.Forms.TextBox();
 			this.studentInfoBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.studentPicture)).BeginInit();
 			this.SuspendLayout();
@@ -259,7 +259,6 @@
 			// 
 			this.background.Cursor = System.Windows.Forms.Cursors.Default;
 			this.background.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.background.Enabled = false;
 			this.background.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
 			this.background.FormattingEnabled = true;
 			this.background.Items.AddRange(new object[] {
@@ -355,9 +354,16 @@
 			this.fatherName.Size = new System.Drawing.Size(206, 28);
 			this.fatherName.TabIndex = 1;
 			// 
+			// licenseText
+			// 
+			this.licenseText.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+			this.licenseText.Location = new System.Drawing.Point(6, 131);
+			this.licenseText.Name = "licenseText";
+			this.licenseText.Size = new System.Drawing.Size(331, 28);
+			this.licenseText.TabIndex = 6;
+			// 
 			// customLicenseText
 			// 
-			this.customLicenseText.Enabled = false;
 			this.customLicenseText.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
 			this.customLicenseText.Location = new System.Drawing.Point(363, 131);
 			this.customLicenseText.Name = "customLicenseText";
@@ -392,6 +398,16 @@
 			this.studentName.TabIndex = 0;
 			this.studentName.SelectedIndexChanged += new System.EventHandler(this.ShowStudentInfo);
 			this.studentName.Leave += new System.EventHandler(this.ShowStudentInfo);
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+			this.label7.Location = new System.Drawing.Point(343, 134);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(14, 22);
+			this.label7.TabIndex = 21;
+			this.label7.Text = ":";
 			// 
 			// label4
 			// 
@@ -492,25 +508,6 @@
 			this.date.Size = new System.Drawing.Size(134, 28);
 			this.date.TabIndex = 36;
 			this.date.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			// 
-			// label7
-			// 
-			this.label7.AutoSize = true;
-			this.label7.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.label7.Location = new System.Drawing.Point(343, 134);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(14, 22);
-			this.label7.TabIndex = 21;
-			this.label7.Text = ":";
-			// 
-			// licenseText
-			// 
-			this.licenseText.Enabled = false;
-			this.licenseText.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.licenseText.Location = new System.Drawing.Point(6, 131);
-			this.licenseText.Name = "licenseText";
-			this.licenseText.Size = new System.Drawing.Size(331, 28);
-			this.licenseText.TabIndex = 6;
 			// 
 			// MainForm
 			// 
