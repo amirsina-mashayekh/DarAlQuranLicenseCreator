@@ -123,7 +123,6 @@ namespace DarAlQuranLicense
 			level.SelectedIndex = 0;
 			score.SelectedIndex = 0;
 			background.SelectedIndex = 0;
-			if (Directory.Exists("عکس قرآن آموزان")) studentsPicturesAddress.Text = Path.GetFullPath("عکس قرآن آموزان");
 			saveAddress.Text = Path.GetFullPath("گواهینامه ها");
 
 			DateTime now = DateTime.Today;
@@ -286,17 +285,6 @@ namespace DarAlQuranLicense
 			return destImage;
 		}
 
-		private void StudentsPicturesBrowse_Click(object sender, EventArgs e)
-		{
-			CommonOpenFileDialog fileDialog = new CommonOpenFileDialog
-			{
-				Multiselect = false,
-				EnsurePathExists = true,
-				IsFolderPicker = true
-			};
-			if (fileDialog.ShowDialog() == CommonFileDialogResult.Ok) studentsPicturesAddress.Text = fileDialog.FileName;
-		}
-
 		private void SaveAddressBrowse_Click(object sender, EventArgs e)
 		{
 			CommonOpenFileDialog fileDialog = new CommonOpenFileDialog
@@ -342,9 +330,9 @@ namespace DarAlQuranLicense
 			}
 
 			hasPicture = false;
-			if (studentsPicturesAddress.Text.Length > 0 && studentName.Text.Length > 0)
+			if (studentName.Text.Length > 0)
 			{
-				string[] files = Directory.GetFiles(studentsPicturesAddress.Text);
+				string[] files = Directory.GetFiles("pictures");
 				string path = "";
 				foreach (string file in files)
 				{

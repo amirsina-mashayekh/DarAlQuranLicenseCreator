@@ -44,9 +44,6 @@
 			this.DepartmentOfEducationManagerLabel = new System.Windows.Forms.Label();
 			this.cityRadioButton = new System.Windows.Forms.RadioButton();
 			this.districtRadioButton = new System.Windows.Forms.RadioButton();
-			this.studentsPicturesAddress = new System.Windows.Forms.TextBox();
-			this.studentsPicturesLabel = new System.Windows.Forms.Label();
-			this.studentsPicturesBrowse = new System.Windows.Forms.Button();
 			this.studentInfoBox = new System.Windows.Forms.GroupBox();
 			this.background = new System.Windows.Forms.ComboBox();
 			this.generate = new System.Windows.Forms.Button();
@@ -223,41 +220,6 @@
 			this.districtRadioButton.TabIndex = 8;
 			this.districtRadioButton.Text = "منطقه";
 			this.districtRadioButton.UseVisualStyleBackColor = true;
-			// 
-			// studentsPicturesAddress
-			// 
-			this.studentsPicturesAddress.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.studentsPicturesAddress.Location = new System.Drawing.Point(158, 182);
-			this.studentsPicturesAddress.Name = "studentsPicturesAddress";
-			this.studentsPicturesAddress.ReadOnly = true;
-			this.studentsPicturesAddress.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.studentsPicturesAddress.Size = new System.Drawing.Size(223, 28);
-			this.studentsPicturesAddress.TabIndex = 11;
-			this.studentsPicturesAddress.TabStop = false;
-			// 
-			// studentsPicturesLabel
-			// 
-			this.studentsPicturesLabel.AutoSize = true;
-			this.studentsPicturesLabel.Cursor = System.Windows.Forms.Cursors.Help;
-			this.studentsPicturesLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.studentsPicturesLabel.Location = new System.Drawing.Point(7, 185);
-			this.studentsPicturesLabel.Name = "studentsPicturesLabel";
-			this.studentsPicturesLabel.Size = new System.Drawing.Size(146, 22);
-			this.studentsPicturesLabel.TabIndex = 8;
-			this.studentsPicturesLabel.Text = "پوشه عکس قرآن آموزان:";
-			this.toolTip.SetToolTip(this.studentsPicturesLabel, "در صورت تمایل به درج عکس‌های قرآن آموزان در گواهینامه به صورت\r\nدیجیتال، پوشه‌ی عک" +
-        "س قرآن آموزان را با استفاده از دکمه‌ی «جستجو...» انتخاب کنید.");
-			// 
-			// studentsPicturesBrowse
-			// 
-			this.studentsPicturesBrowse.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.studentsPicturesBrowse.Location = new System.Drawing.Point(387, 179);
-			this.studentsPicturesBrowse.Name = "studentsPicturesBrowse";
-			this.studentsPicturesBrowse.Size = new System.Drawing.Size(85, 32);
-			this.studentsPicturesBrowse.TabIndex = 10;
-			this.studentsPicturesBrowse.Text = "جستجو...";
-			this.studentsPicturesBrowse.UseVisualStyleBackColor = true;
-			this.studentsPicturesBrowse.Click += new System.EventHandler(this.StudentsPicturesBrowse_Click);
 			// 
 			// studentInfoBox
 			// 
@@ -599,17 +561,14 @@
 			this.Controls.Add(this.helpButton);
 			this.Controls.Add(this.studentInfoBox);
 			this.Controls.Add(this.saveAddressBrowse);
-			this.Controls.Add(this.studentsPicturesBrowse);
 			this.Controls.Add(this.doEManager);
 			this.Controls.Add(this.DepartmentOfEducationManagerLabel);
 			this.Controls.Add(this.saveLabel);
 			this.Controls.Add(this.dQManager);
-			this.Controls.Add(this.studentsPicturesLabel);
 			this.Controls.Add(this.darAlQuranManagerLabel);
 			this.Controls.Add(this.dateLabel);
 			this.Controls.Add(this.saveAddress);
 			this.Controls.Add(this.number);
-			this.Controls.Add(this.studentsPicturesAddress);
 			this.Controls.Add(this.numberLabel);
 			this.Controls.Add(this.dQName);
 			this.Controls.Add(this.darAlQuranLabel);
@@ -650,9 +609,6 @@
 		private System.Windows.Forms.Label DepartmentOfEducationManagerLabel;
 		private System.Windows.Forms.RadioButton cityRadioButton;
 		private System.Windows.Forms.RadioButton districtRadioButton;
-		private System.Windows.Forms.TextBox studentsPicturesAddress;
-		private System.Windows.Forms.Label studentsPicturesLabel;
-		private System.Windows.Forms.Button studentsPicturesBrowse;
 		private System.Windows.Forms.GroupBox studentInfoBox;
 		private System.Windows.Forms.TextBox customLicenseText;
 		private System.Windows.Forms.RadioButton customLicenseRadioButton;
