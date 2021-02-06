@@ -54,10 +54,7 @@
 			this.studentCode = new System.Windows.Forms.TextBox();
 			this.fatherName = new System.Windows.Forms.TextBox();
 			this.customLicenseText = new System.Windows.Forms.TextBox();
-			this.customLicenseRadioButton = new System.Windows.Forms.RadioButton();
-			this.levelRadioButton = new System.Windows.Forms.RadioButton();
 			this.score = new System.Windows.Forms.ComboBox();
-			this.level = new System.Windows.Forms.ComboBox();
 			this.studentName = new System.Windows.Forms.ComboBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
@@ -69,6 +66,8 @@
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.helpButton = new System.Windows.Forms.Button();
 			this.date = new System.Windows.Forms.MaskedTextBox();
+			this.label7 = new System.Windows.Forms.Label();
+			this.licenseText = new System.Windows.Forms.TextBox();
 			this.studentInfoBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.studentPicture)).BeginInit();
 			this.SuspendLayout();
@@ -238,21 +237,20 @@
 			this.studentInfoBox.Controls.Add(this.studentPicture);
 			this.studentInfoBox.Controls.Add(this.studentCode);
 			this.studentInfoBox.Controls.Add(this.fatherName);
+			this.studentInfoBox.Controls.Add(this.licenseText);
 			this.studentInfoBox.Controls.Add(this.customLicenseText);
-			this.studentInfoBox.Controls.Add(this.customLicenseRadioButton);
-			this.studentInfoBox.Controls.Add(this.levelRadioButton);
 			this.studentInfoBox.Controls.Add(this.score);
-			this.studentInfoBox.Controls.Add(this.level);
 			this.studentInfoBox.Controls.Add(this.studentName);
+			this.studentInfoBox.Controls.Add(this.label7);
 			this.studentInfoBox.Controls.Add(this.label4);
 			this.studentInfoBox.Controls.Add(this.label6);
 			this.studentInfoBox.Controls.Add(this.label5);
 			this.studentInfoBox.Controls.Add(this.label3);
 			this.studentInfoBox.Controls.Add(this.label2);
 			this.studentInfoBox.Controls.Add(this.label1);
-			this.studentInfoBox.Location = new System.Drawing.Point(12, 250);
+			this.studentInfoBox.Location = new System.Drawing.Point(12, 145);
 			this.studentInfoBox.Name = "studentInfoBox";
-			this.studentInfoBox.Size = new System.Drawing.Size(460, 236);
+			this.studentInfoBox.Size = new System.Drawing.Size(535, 284);
 			this.studentInfoBox.TabIndex = 12;
 			this.studentInfoBox.TabStop = false;
 			this.studentInfoBox.Text = "مشخصات قرآن آموز";
@@ -275,16 +273,16 @@
             "طرح‌زمینه 8",
             "طرح‌زمینه 9",
             "طرح‌زمینه 10"});
-			this.background.Location = new System.Drawing.Point(6, 100);
+			this.background.Location = new System.Drawing.Point(134, 181);
 			this.background.Name = "background";
-			this.background.Size = new System.Drawing.Size(89, 29);
+			this.background.Size = new System.Drawing.Size(120, 29);
 			this.background.TabIndex = 36;
 			this.toolTip.SetToolTip(this.background, "طرح زمینه مورد نظر را انتخاب کنید.");
 			// 
 			// changePicture
 			// 
 			this.changePicture.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.changePicture.Location = new System.Drawing.Point(136, 201);
+			this.changePicture.Location = new System.Drawing.Point(211, 248);
 			this.changePicture.Name = "changePicture";
 			this.changePicture.Size = new System.Drawing.Size(86, 30);
 			this.changePicture.TabIndex = 35;
@@ -295,7 +293,7 @@
 			// deleteStudent
 			// 
 			this.deleteStudent.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.deleteStudent.Location = new System.Drawing.Point(228, 201);
+			this.deleteStudent.Location = new System.Drawing.Point(303, 248);
 			this.deleteStudent.Name = "deleteStudent";
 			this.deleteStudent.Size = new System.Drawing.Size(110, 30);
 			this.deleteStudent.TabIndex = 35;
@@ -306,7 +304,7 @@
 			// generate
 			// 
 			this.generate.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.generate.Location = new System.Drawing.Point(344, 201);
+			this.generate.Location = new System.Drawing.Point(419, 248);
 			this.generate.Name = "generate";
 			this.generate.Size = new System.Drawing.Size(110, 30);
 			this.generate.TabIndex = 35;
@@ -321,7 +319,7 @@
 			this.dateCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.dateCheckBox.Cursor = System.Windows.Forms.Cursors.Help;
 			this.dateCheckBox.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.dateCheckBox.Location = new System.Drawing.Point(243, 169);
+			this.dateCheckBox.Location = new System.Drawing.Point(318, 216);
 			this.dateCheckBox.Name = "dateCheckBox";
 			this.dateCheckBox.Size = new System.Drawing.Size(211, 26);
 			this.dateCheckBox.TabIndex = 8;
@@ -333,7 +331,7 @@
 			// 
 			this.studentPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.studentPicture.Cursor = System.Windows.Forms.Cursors.Default;
-			this.studentPicture.Location = new System.Drawing.Point(6, 135);
+			this.studentPicture.Location = new System.Drawing.Point(6, 182);
 			this.studentPicture.Name = "studentPicture";
 			this.studentPicture.Size = new System.Drawing.Size(72, 96);
 			this.studentPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -343,7 +341,7 @@
 			// studentCode
 			// 
 			this.studentCode.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.studentCode.Location = new System.Drawing.Point(293, 81);
+			this.studentCode.Location = new System.Drawing.Point(368, 81);
 			this.studentCode.Name = "studentCode";
 			this.studentCode.Size = new System.Drawing.Size(45, 28);
 			this.studentCode.TabIndex = 2;
@@ -354,45 +352,17 @@
 			this.fatherName.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
 			this.fatherName.Location = new System.Drawing.Point(6, 31);
 			this.fatherName.Name = "fatherName";
-			this.fatherName.Size = new System.Drawing.Size(131, 28);
+			this.fatherName.Size = new System.Drawing.Size(206, 28);
 			this.fatherName.TabIndex = 1;
 			// 
 			// customLicenseText
 			// 
 			this.customLicenseText.Enabled = false;
 			this.customLicenseText.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.customLicenseText.Location = new System.Drawing.Point(101, 100);
+			this.customLicenseText.Location = new System.Drawing.Point(363, 131);
 			this.customLicenseText.Name = "customLicenseText";
 			this.customLicenseText.Size = new System.Drawing.Size(106, 28);
 			this.customLicenseText.TabIndex = 6;
-			// 
-			// customLicenseRadioButton
-			// 
-			this.customLicenseRadioButton.AutoSize = true;
-			this.customLicenseRadioButton.Cursor = System.Windows.Forms.Cursors.Help;
-			this.customLicenseRadioButton.Location = new System.Drawing.Point(213, 106);
-			this.customLicenseRadioButton.Name = "customLicenseRadioButton";
-			this.customLicenseRadioButton.Size = new System.Drawing.Size(14, 13);
-			this.customLicenseRadioButton.TabIndex = 5;
-			this.toolTip.SetToolTip(this.customLicenseRadioButton, "جهت درج عبارت: «موفق به: ...» در گواهینامه از این گزینه استفاده کنید.");
-			this.customLicenseRadioButton.UseVisualStyleBackColor = true;
-			// 
-			// levelRadioButton
-			// 
-			this.levelRadioButton.AutoSize = true;
-			this.levelRadioButton.Checked = true;
-			this.levelRadioButton.Cursor = System.Windows.Forms.Cursors.Help;
-			this.levelRadioButton.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.levelRadioButton.Location = new System.Drawing.Point(122, 65);
-			this.levelRadioButton.Name = "levelRadioButton";
-			this.levelRadioButton.Size = new System.Drawing.Size(105, 26);
-			this.levelRadioButton.TabIndex = 3;
-			this.levelRadioButton.TabStop = true;
-			this.levelRadioButton.Text = "گذراندن سطح";
-			this.toolTip.SetToolTip(this.levelRadioButton, "جهت درج عبارت: «موفق به گذراندن سطح: ...» در گواهینامه از این گزینه استفاده کنید." +
-        "");
-			this.levelRadioButton.UseVisualStyleBackColor = true;
-			this.levelRadioButton.CheckedChanged += new System.EventHandler(this.LevelRadioButton_CheckedChanged);
 			// 
 			// score
 			// 
@@ -404,31 +374,10 @@
             "خیلی خوب",
             "خوب",
             "متوسط"});
-			this.score.Location = new System.Drawing.Point(299, 134);
+			this.score.Location = new System.Drawing.Point(349, 181);
 			this.score.Name = "score";
-			this.score.Size = new System.Drawing.Size(100, 29);
+			this.score.Size = new System.Drawing.Size(125, 29);
 			this.score.TabIndex = 7;
-			// 
-			// level
-			// 
-			this.level.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.level.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.level.FormattingEnabled = true;
-			this.level.Items.AddRange(new object[] {
-            "یک",
-            "دو",
-            "سه",
-            "چهار",
-            "پنج",
-            "شش",
-            "هفت",
-            "هشت",
-            "نه",
-            "ده"});
-			this.level.Location = new System.Drawing.Point(6, 65);
-			this.level.Name = "level";
-			this.level.Size = new System.Drawing.Size(110, 29);
-			this.level.TabIndex = 4;
 			// 
 			// studentName
 			// 
@@ -437,7 +386,7 @@
 			this.studentName.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
 			this.studentName.FormattingEnabled = true;
 			this.studentName.IntegralHeight = false;
-			this.studentName.Location = new System.Drawing.Point(187, 31);
+			this.studentName.Location = new System.Drawing.Point(262, 31);
 			this.studentName.Name = "studentName";
 			this.studentName.Size = new System.Drawing.Size(200, 29);
 			this.studentName.TabIndex = 0;
@@ -448,7 +397,7 @@
 			// 
 			this.label4.AutoSize = true;
 			this.label4.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.label4.Location = new System.Drawing.Point(233, 84);
+			this.label4.Location = new System.Drawing.Point(475, 134);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(54, 22);
 			this.label4.TabIndex = 21;
@@ -458,17 +407,17 @@
 			// 
 			this.label6.AutoSize = true;
 			this.label6.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.label6.Location = new System.Drawing.Point(222, 137);
+			this.label6.Location = new System.Drawing.Point(260, 184);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(71, 22);
+			this.label6.Size = new System.Drawing.Size(83, 22);
 			this.label6.TabIndex = 22;
-			this.label6.Text = "شده است.";
+			this.label6.Text = "گردیده است.";
 			// 
 			// label5
 			// 
 			this.label5.AutoSize = true;
 			this.label5.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.label5.Location = new System.Drawing.Point(405, 137);
+			this.label5.Location = new System.Drawing.Point(480, 184);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(49, 22);
 			this.label5.TabIndex = 23;
@@ -478,7 +427,7 @@
 			// 
 			this.label3.AutoSize = true;
 			this.label3.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.label3.Location = new System.Drawing.Point(344, 84);
+			this.label3.Location = new System.Drawing.Point(419, 84);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(110, 22);
 			this.label3.TabIndex = 24;
@@ -488,7 +437,7 @@
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.label2.Location = new System.Drawing.Point(143, 34);
+			this.label2.Location = new System.Drawing.Point(218, 34);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(38, 22);
 			this.label2.TabIndex = 26;
@@ -498,7 +447,7 @@
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.label1.Location = new System.Drawing.Point(393, 34);
+			this.label1.Location = new System.Drawing.Point(468, 34);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(61, 22);
 			this.label1.TabIndex = 27;
@@ -508,11 +457,11 @@
 			// 
 			this.message.Cursor = System.Windows.Forms.Cursors.Default;
 			this.message.Font = new System.Drawing.Font("Samim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.message.Location = new System.Drawing.Point(11, 488);
+			this.message.Location = new System.Drawing.Point(12, 435);
 			this.message.Multiline = true;
 			this.message.Name = "message";
 			this.message.ReadOnly = true;
-			this.message.Size = new System.Drawing.Size(352, 45);
+			this.message.Size = new System.Drawing.Size(454, 45);
 			this.message.TabIndex = 35;
 			this.toolTip.SetToolTip(this.message, "پیغام نرم افزار");
 			// 
@@ -525,7 +474,7 @@
 			// helpButton
 			// 
 			this.helpButton.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.helpButton.Location = new System.Drawing.Point(397, 496);
+			this.helpButton.Location = new System.Drawing.Point(472, 444);
 			this.helpButton.Name = "helpButton";
 			this.helpButton.Size = new System.Drawing.Size(75, 30);
 			this.helpButton.TabIndex = 13;
@@ -544,12 +493,31 @@
 			this.date.TabIndex = 36;
 			this.date.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+			this.label7.Location = new System.Drawing.Point(343, 134);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(14, 22);
+			this.label7.TabIndex = 21;
+			this.label7.Text = ":";
+			// 
+			// licenseText
+			// 
+			this.licenseText.Enabled = false;
+			this.licenseText.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+			this.licenseText.Location = new System.Drawing.Point(6, 131);
+			this.licenseText.Name = "licenseText";
+			this.licenseText.Size = new System.Drawing.Size(331, 28);
+			this.licenseText.TabIndex = 6;
+			// 
 			// MainForm
 			// 
 			this.AcceptButton = this.generate;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-			this.ClientSize = new System.Drawing.Size(559, 536);
+			this.ClientSize = new System.Drawing.Size(559, 486);
 			this.Controls.Add(this.cityLabel);
 			this.Controls.Add(this.districtRadioButton);
 			this.Controls.Add(this.cityRadioButton);
@@ -605,8 +573,6 @@
 		private System.Windows.Forms.RadioButton districtRadioButton;
 		private System.Windows.Forms.GroupBox studentInfoBox;
 		private System.Windows.Forms.TextBox customLicenseText;
-		private System.Windows.Forms.RadioButton customLicenseRadioButton;
-		private System.Windows.Forms.RadioButton levelRadioButton;
 		private System.Windows.Forms.ComboBox score;
 		private System.Windows.Forms.ComboBox studentName;
 		private System.Windows.Forms.Label label4;
@@ -618,7 +584,6 @@
 		private System.Windows.Forms.ToolTip toolTip;
 		private System.Windows.Forms.PictureBox studentPicture;
 		private System.Windows.Forms.Button helpButton;
-		private System.Windows.Forms.ComboBox level;
 		private System.Windows.Forms.TextBox message;
 		private System.Windows.Forms.TextBox fatherName;
 		private System.Windows.Forms.CheckBox dateCheckBox;
@@ -628,6 +593,8 @@
 		private System.Windows.Forms.MaskedTextBox date;
 		private System.Windows.Forms.Button changePicture;
 		private System.Windows.Forms.Button deleteStudent;
+		private System.Windows.Forms.TextBox licenseText;
+		private System.Windows.Forms.Label label7;
 	}
 }
 
