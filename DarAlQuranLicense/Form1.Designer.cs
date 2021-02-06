@@ -77,7 +77,7 @@
 			// 
 			this.provinceLabel.AutoSize = true;
 			this.provinceLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.provinceLabel.Location = new System.Drawing.Point(12, 9);
+			this.provinceLabel.Location = new System.Drawing.Point(51, 9);
 			this.provinceLabel.Name = "provinceLabel";
 			this.provinceLabel.Size = new System.Drawing.Size(47, 22);
 			this.provinceLabel.TabIndex = 0;
@@ -86,9 +86,9 @@
 			// province
 			// 
 			this.province.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.province.Location = new System.Drawing.Point(109, 6);
+			this.province.Location = new System.Drawing.Point(106, 6);
 			this.province.Name = "province";
-			this.province.Size = new System.Drawing.Size(131, 28);
+			this.province.Size = new System.Drawing.Size(134, 28);
 			this.province.TabIndex = 0;
 			this.province.Leave += new System.EventHandler(this.UpdateDQInfo);
 			// 
@@ -114,9 +114,9 @@
 			// dQName
 			// 
 			this.dQName.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.dQName.Location = new System.Drawing.Point(109, 40);
+			this.dQName.Location = new System.Drawing.Point(106, 40);
 			this.dQName.Name = "dQName";
-			this.dQName.Size = new System.Drawing.Size(438, 28);
+			this.dQName.Size = new System.Drawing.Size(441, 28);
 			this.dQName.TabIndex = 2;
 			this.dQName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.dQName.Leave += new System.EventHandler(this.UpdateDQInfo);
@@ -125,7 +125,7 @@
 			// 
 			this.darAlQuranLabel.AutoSize = true;
 			this.darAlQuranLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.darAlQuranLabel.Location = new System.Drawing.Point(13, 43);
+			this.darAlQuranLabel.Location = new System.Drawing.Point(37, 43);
 			this.darAlQuranLabel.Name = "darAlQuranLabel";
 			this.darAlQuranLabel.Size = new System.Drawing.Size(61, 22);
 			this.darAlQuranLabel.TabIndex = 4;
@@ -136,7 +136,7 @@
 			this.numberLabel.AutoSize = true;
 			this.numberLabel.Cursor = System.Windows.Forms.Cursors.Help;
 			this.numberLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.numberLabel.Location = new System.Drawing.Point(246, 114);
+			this.numberLabel.Location = new System.Drawing.Point(366, 114);
 			this.numberLabel.Name = "numberLabel";
 			this.numberLabel.Size = new System.Drawing.Size(46, 22);
 			this.numberLabel.TabIndex = 6;
@@ -148,7 +148,7 @@
 			this.dateLabel.AutoSize = true;
 			this.dateLabel.Cursor = System.Windows.Forms.Cursors.Default;
 			this.dateLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.dateLabel.Location = new System.Drawing.Point(12, 111);
+			this.dateLabel.Location = new System.Drawing.Point(56, 111);
 			this.dateLabel.Name = "dateLabel";
 			this.dateLabel.Size = new System.Drawing.Size(42, 22);
 			this.dateLabel.TabIndex = 8;
@@ -165,9 +165,9 @@
 			// dQManager
 			// 
 			this.dQManager.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.dQManager.Location = new System.Drawing.Point(109, 74);
+			this.dQManager.Location = new System.Drawing.Point(106, 74);
 			this.dQManager.Name = "dQManager";
-			this.dQManager.Size = new System.Drawing.Size(131, 28);
+			this.dQManager.Size = new System.Drawing.Size(134, 28);
 			this.dQManager.TabIndex = 5;
 			this.dQManager.Leave += new System.EventHandler(this.UpdateDQInfo);
 			// 
@@ -175,7 +175,8 @@
 			// 
 			this.darAlQuranManagerLabel.AutoSize = true;
 			this.darAlQuranManagerLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.darAlQuranManagerLabel.Location = new System.Drawing.Point(12, 77);
+			this.darAlQuranManagerLabel.Location = new System.Drawing.Point(9, 77);
+			this.darAlQuranManagerLabel.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
 			this.darAlQuranManagerLabel.Name = "darAlQuranManagerLabel";
 			this.darAlQuranManagerLabel.Size = new System.Drawing.Size(91, 22);
 			this.darAlQuranManagerLabel.TabIndex = 9;
@@ -194,7 +195,7 @@
 			// 
 			this.DepartmentOfEducationManagerLabel.AutoSize = true;
 			this.DepartmentOfEducationManagerLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.DepartmentOfEducationManagerLabel.Location = new System.Drawing.Point(246, 77);
+			this.DepartmentOfEducationManagerLabel.Location = new System.Drawing.Point(280, 77);
 			this.DepartmentOfEducationManagerLabel.Name = "DepartmentOfEducationManagerLabel";
 			this.DepartmentOfEducationManagerLabel.Size = new System.Drawing.Size(132, 22);
 			this.DepartmentOfEducationManagerLabel.TabIndex = 11;
@@ -535,11 +536,11 @@
 			// date
 			// 
 			this.date.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.date.Location = new System.Drawing.Point(109, 108);
+			this.date.Location = new System.Drawing.Point(106, 108);
 			this.date.Mask = "0000/00/00";
 			this.date.Name = "date";
 			this.date.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.date.Size = new System.Drawing.Size(131, 28);
+			this.date.Size = new System.Drawing.Size(134, 28);
 			this.date.TabIndex = 36;
 			this.date.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
