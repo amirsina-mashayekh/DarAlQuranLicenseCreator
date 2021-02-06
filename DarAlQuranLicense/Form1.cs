@@ -149,9 +149,9 @@ namespace DarAlQuranLicense
 					districtRadioButton.Checked = true;
 				}
 				city.Text = darAlQuranInfo.Region;
-				darAlQuran.Text = darAlQuranInfo.DQName;
-				darAlQuranManager.Text = darAlQuranInfo.DQMFirstName + ' ' + darAlQuranInfo.DQMLastName;
-				DepartmentOfEducationManager.Text = darAlQuranInfo.DoEMFirstName + ' ' + darAlQuranInfo.DoEMLastName;
+				dQName.Text = darAlQuranInfo.DQName;
+				dQManager.Text = darAlQuranInfo.DQMFirstName + ' ' + darAlQuranInfo.DQMLastName;
+				doEManager.Text = darAlQuranInfo.DoEMFirstName + ' ' + darAlQuranInfo.DoEMLastName;
 			}
 			catch (Exception)
 			{
@@ -463,10 +463,10 @@ namespace DarAlQuranLicense
 				}
 				else EmptyFields.Add("شهرستان");
 
-				if (darAlQuran.Text.Length > 0)
+				if (dQName.Text.Length > 0)
 				{
-					FitAndDrawString("دارالقرآن " + darAlQuran.Text, IranNastaliq32, RTLC, BlackBrush, ref graphics, bitmap.Width / 2, 620);
-					FitAndDrawString("مدیر دارالقرآن " + darAlQuran.Text, BNazanin37, RTLC, BlackBrush, ref graphics, 1810, 2955 - 15, 590);
+					FitAndDrawString("دارالقرآن " + dQName.Text, IranNastaliq32, RTLC, BlackBrush, ref graphics, bitmap.Width / 2, 620);
+					FitAndDrawString("مدیر دارالقرآن " + dQName.Text, BNazanin37, RTLC, BlackBrush, ref graphics, 1810, 2955 - 15, 590);
 				}
 				else EmptyFields.Add("دارالقرآن");
 
@@ -535,10 +535,10 @@ namespace DarAlQuranLicense
 				if (score.Text.Length > 0) FitAndDrawString(score.Text.EnglishNumbersToPersian(), IranNastaliq58, RTL, BlackBrush, ref graphics, 1925, 2500 - 5, 400);
 				else EmptyFields.Add("درجه گواهینامه");
 
-				if (darAlQuranManager.Text.Length > 0) FitAndDrawString(darAlQuranManager.Text, BNazanin37, RTLC, BlackBrush, ref graphics, 1845, 2875 - 15, 550);
+				if (dQManager.Text.Length > 0) FitAndDrawString(dQManager.Text, BNazanin37, RTLC, BlackBrush, ref graphics, 1845, 2875 - 15, 550);
 				else EmptyFields.Add("مدیر دارالقرآن");
 
-				if (DepartmentOfEducationManager.Text.Length > 0) FitAndDrawString(DepartmentOfEducationManager.Text, BNazanin37, RTLC, BlackBrush, ref graphics, 1175, 2875 - 15, 700);
+				if (doEManager.Text.Length > 0) FitAndDrawString(doEManager.Text, BNazanin37, RTLC, BlackBrush, ref graphics, 1175, 2875 - 15, 700);
 				else EmptyFields.Add("مدیر آموزش و پرورش");
 
 				if (hasPicture)

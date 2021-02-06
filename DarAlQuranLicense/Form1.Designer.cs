@@ -33,14 +33,14 @@
 			this.province = new System.Windows.Forms.TextBox();
 			this.city = new System.Windows.Forms.TextBox();
 			this.cityLabel = new System.Windows.Forms.Label();
-			this.darAlQuran = new System.Windows.Forms.TextBox();
+			this.dQName = new System.Windows.Forms.TextBox();
 			this.darAlQuranLabel = new System.Windows.Forms.Label();
 			this.numberLabel = new System.Windows.Forms.Label();
 			this.dateLabel = new System.Windows.Forms.Label();
 			this.number = new System.Windows.Forms.TextBox();
-			this.darAlQuranManager = new System.Windows.Forms.TextBox();
+			this.dQManager = new System.Windows.Forms.TextBox();
 			this.darAlQuranManagerLabel = new System.Windows.Forms.Label();
-			this.DepartmentOfEducationManager = new System.Windows.Forms.TextBox();
+			this.doEManager = new System.Windows.Forms.TextBox();
 			this.DepartmentOfEducationManagerLabel = new System.Windows.Forms.Label();
 			this.cityRadioButton = new System.Windows.Forms.RadioButton();
 			this.districtRadioButton = new System.Windows.Forms.RadioButton();
@@ -81,7 +81,7 @@
 			// 
 			this.provinceLabel.AutoSize = true;
 			this.provinceLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.provinceLabel.Location = new System.Drawing.Point(7, 15);
+			this.provinceLabel.Location = new System.Drawing.Point(12, 9);
 			this.provinceLabel.Name = "provinceLabel";
 			this.provinceLabel.Size = new System.Drawing.Size(47, 22);
 			this.provinceLabel.TabIndex = 0;
@@ -90,42 +90,43 @@
 			// province
 			// 
 			this.province.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.province.Location = new System.Drawing.Point(60, 12);
+			this.province.Location = new System.Drawing.Point(109, 6);
 			this.province.Name = "province";
-			this.province.Size = new System.Drawing.Size(169, 28);
+			this.province.Size = new System.Drawing.Size(131, 28);
 			this.province.TabIndex = 0;
 			// 
 			// city
 			// 
 			this.city.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.city.Location = new System.Drawing.Point(357, 12);
+			this.city.Location = new System.Drawing.Point(418, 6);
 			this.city.Name = "city";
-			this.city.Size = new System.Drawing.Size(115, 28);
+			this.city.Size = new System.Drawing.Size(129, 28);
 			this.city.TabIndex = 1;
 			// 
 			// cityLabel
 			// 
 			this.cityLabel.AutoSize = true;
 			this.cityLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.cityLabel.Location = new System.Drawing.Point(235, 15);
+			this.cityLabel.Location = new System.Drawing.Point(398, 9);
 			this.cityLabel.Name = "cityLabel";
-			this.cityLabel.Size = new System.Drawing.Size(116, 22);
+			this.cityLabel.Size = new System.Drawing.Size(14, 22);
 			this.cityLabel.TabIndex = 2;
-			this.cityLabel.Text = "شهرستان / منطقه:";
+			this.cityLabel.Text = ":";
 			// 
-			// darAlQuran
+			// dQName
 			// 
-			this.darAlQuran.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.darAlQuran.Location = new System.Drawing.Point(74, 46);
-			this.darAlQuran.Name = "darAlQuran";
-			this.darAlQuran.Size = new System.Drawing.Size(155, 28);
-			this.darAlQuran.TabIndex = 2;
+			this.dQName.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+			this.dQName.Location = new System.Drawing.Point(109, 40);
+			this.dQName.Name = "dQName";
+			this.dQName.Size = new System.Drawing.Size(438, 28);
+			this.dQName.TabIndex = 2;
+			this.dQName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// darAlQuranLabel
 			// 
 			this.darAlQuranLabel.AutoSize = true;
 			this.darAlQuranLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.darAlQuranLabel.Location = new System.Drawing.Point(7, 49);
+			this.darAlQuranLabel.Location = new System.Drawing.Point(13, 43);
 			this.darAlQuranLabel.Name = "darAlQuranLabel";
 			this.darAlQuranLabel.Size = new System.Drawing.Size(61, 22);
 			this.darAlQuranLabel.TabIndex = 4;
@@ -136,7 +137,7 @@
 			this.numberLabel.AutoSize = true;
 			this.numberLabel.Cursor = System.Windows.Forms.Cursors.Help;
 			this.numberLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.numberLabel.Location = new System.Drawing.Point(235, 49);
+			this.numberLabel.Location = new System.Drawing.Point(246, 114);
 			this.numberLabel.Name = "numberLabel";
 			this.numberLabel.Size = new System.Drawing.Size(46, 22);
 			this.numberLabel.TabIndex = 6;
@@ -148,7 +149,7 @@
 			this.dateLabel.AutoSize = true;
 			this.dateLabel.Cursor = System.Windows.Forms.Cursors.Default;
 			this.dateLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.dateLabel.Location = new System.Drawing.Point(7, 83);
+			this.dateLabel.Location = new System.Drawing.Point(12, 111);
 			this.dateLabel.Name = "dateLabel";
 			this.dateLabel.Size = new System.Drawing.Size(42, 22);
 			this.dateLabel.TabIndex = 8;
@@ -157,42 +158,42 @@
 			// number
 			// 
 			this.number.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.number.Location = new System.Drawing.Point(287, 46);
+			this.number.Location = new System.Drawing.Point(418, 111);
 			this.number.Name = "number";
-			this.number.Size = new System.Drawing.Size(185, 28);
+			this.number.Size = new System.Drawing.Size(129, 28);
 			this.number.TabIndex = 3;
 			// 
-			// darAlQuranManager
+			// dQManager
 			// 
-			this.darAlQuranManager.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.darAlQuranManager.Location = new System.Drawing.Point(332, 80);
-			this.darAlQuranManager.Name = "darAlQuranManager";
-			this.darAlQuranManager.Size = new System.Drawing.Size(140, 28);
-			this.darAlQuranManager.TabIndex = 5;
+			this.dQManager.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+			this.dQManager.Location = new System.Drawing.Point(109, 74);
+			this.dQManager.Name = "dQManager";
+			this.dQManager.Size = new System.Drawing.Size(131, 28);
+			this.dQManager.TabIndex = 5;
 			// 
 			// darAlQuranManagerLabel
 			// 
 			this.darAlQuranManagerLabel.AutoSize = true;
 			this.darAlQuranManagerLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.darAlQuranManagerLabel.Location = new System.Drawing.Point(235, 83);
+			this.darAlQuranManagerLabel.Location = new System.Drawing.Point(12, 77);
 			this.darAlQuranManagerLabel.Name = "darAlQuranManagerLabel";
 			this.darAlQuranManagerLabel.Size = new System.Drawing.Size(91, 22);
 			this.darAlQuranManagerLabel.TabIndex = 9;
 			this.darAlQuranManagerLabel.Text = "مدیر دارالقرآن:";
 			// 
-			// DepartmentOfEducationManager
+			// doEManager
 			// 
-			this.DepartmentOfEducationManager.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.DepartmentOfEducationManager.Location = new System.Drawing.Point(142, 114);
-			this.DepartmentOfEducationManager.Name = "DepartmentOfEducationManager";
-			this.DepartmentOfEducationManager.Size = new System.Drawing.Size(160, 28);
-			this.DepartmentOfEducationManager.TabIndex = 6;
+			this.doEManager.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+			this.doEManager.Location = new System.Drawing.Point(418, 74);
+			this.doEManager.Name = "doEManager";
+			this.doEManager.Size = new System.Drawing.Size(129, 28);
+			this.doEManager.TabIndex = 6;
 			// 
 			// DepartmentOfEducationManagerLabel
 			// 
 			this.DepartmentOfEducationManagerLabel.AutoSize = true;
 			this.DepartmentOfEducationManagerLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.DepartmentOfEducationManagerLabel.Location = new System.Drawing.Point(7, 117);
+			this.DepartmentOfEducationManagerLabel.Location = new System.Drawing.Point(246, 77);
 			this.DepartmentOfEducationManagerLabel.Name = "DepartmentOfEducationManagerLabel";
 			this.DepartmentOfEducationManagerLabel.Size = new System.Drawing.Size(132, 22);
 			this.DepartmentOfEducationManagerLabel.TabIndex = 11;
@@ -203,25 +204,24 @@
 			this.cityRadioButton.AutoSize = true;
 			this.cityRadioButton.Checked = true;
 			this.cityRadioButton.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.cityRadioButton.Location = new System.Drawing.Point(316, 114);
+			this.cityRadioButton.Location = new System.Drawing.Point(246, 6);
 			this.cityRadioButton.Name = "cityRadioButton";
-			this.cityRadioButton.Size = new System.Drawing.Size(81, 26);
+			this.cityRadioButton.Size = new System.Drawing.Size(90, 26);
 			this.cityRadioButton.TabIndex = 7;
 			this.cityRadioButton.TabStop = true;
-			this.cityRadioButton.Text = "شهرستان";
+			this.cityRadioButton.Text = "شهرستان /";
 			this.cityRadioButton.UseVisualStyleBackColor = true;
 			// 
 			// districtRadioButton
 			// 
 			this.districtRadioButton.AutoSize = true;
-			this.districtRadioButton.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
 			this.districtRadioButton.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.districtRadioButton.Location = new System.Drawing.Point(391, 114);
+			this.districtRadioButton.Location = new System.Drawing.Point(339, 6);
 			this.districtRadioButton.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
 			this.districtRadioButton.Name = "districtRadioButton";
-			this.districtRadioButton.Size = new System.Drawing.Size(81, 26);
+			this.districtRadioButton.Size = new System.Drawing.Size(64, 26);
 			this.districtRadioButton.TabIndex = 8;
-			this.districtRadioButton.Text = "/   منطقه";
+			this.districtRadioButton.Text = "منطقه";
 			this.districtRadioButton.UseVisualStyleBackColor = true;
 			// 
 			// studentsPicturesAddress
@@ -577,11 +577,11 @@
 			// date
 			// 
 			this.date.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.date.Location = new System.Drawing.Point(55, 80);
+			this.date.Location = new System.Drawing.Point(109, 108);
 			this.date.Mask = "0000/00/00";
 			this.date.Name = "date";
 			this.date.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.date.Size = new System.Drawing.Size(174, 28);
+			this.date.Size = new System.Drawing.Size(131, 28);
 			this.date.TabIndex = 36;
 			this.date.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
@@ -590,19 +590,20 @@
 			this.AcceptButton = this.generate;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-			this.ClientSize = new System.Drawing.Size(484, 536);
+			this.ClientSize = new System.Drawing.Size(559, 536);
+			this.Controls.Add(this.cityLabel);
+			this.Controls.Add(this.districtRadioButton);
+			this.Controls.Add(this.cityRadioButton);
 			this.Controls.Add(this.date);
 			this.Controls.Add(this.message);
 			this.Controls.Add(this.helpButton);
 			this.Controls.Add(this.studentInfoBox);
 			this.Controls.Add(this.saveAddressBrowse);
 			this.Controls.Add(this.studentsPicturesBrowse);
-			this.Controls.Add(this.districtRadioButton);
-			this.Controls.Add(this.cityRadioButton);
-			this.Controls.Add(this.DepartmentOfEducationManager);
+			this.Controls.Add(this.doEManager);
 			this.Controls.Add(this.DepartmentOfEducationManagerLabel);
 			this.Controls.Add(this.saveLabel);
-			this.Controls.Add(this.darAlQuranManager);
+			this.Controls.Add(this.dQManager);
 			this.Controls.Add(this.studentsPicturesLabel);
 			this.Controls.Add(this.darAlQuranManagerLabel);
 			this.Controls.Add(this.dateLabel);
@@ -610,10 +611,9 @@
 			this.Controls.Add(this.number);
 			this.Controls.Add(this.studentsPicturesAddress);
 			this.Controls.Add(this.numberLabel);
-			this.Controls.Add(this.darAlQuran);
+			this.Controls.Add(this.dQName);
 			this.Controls.Add(this.darAlQuranLabel);
 			this.Controls.Add(this.city);
-			this.Controls.Add(this.cityLabel);
 			this.Controls.Add(this.province);
 			this.Controls.Add(this.provinceLabel);
 			this.Font = new System.Drawing.Font("Samim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
@@ -639,14 +639,14 @@
 		private System.Windows.Forms.TextBox province;
 		private System.Windows.Forms.TextBox city;
 		private System.Windows.Forms.Label cityLabel;
-		private System.Windows.Forms.TextBox darAlQuran;
+		private System.Windows.Forms.TextBox dQName;
 		private System.Windows.Forms.Label darAlQuranLabel;
 		private System.Windows.Forms.Label numberLabel;
 		private System.Windows.Forms.Label dateLabel;
 		private System.Windows.Forms.TextBox number;
-		private System.Windows.Forms.TextBox darAlQuranManager;
+		private System.Windows.Forms.TextBox dQManager;
 		private System.Windows.Forms.Label darAlQuranManagerLabel;
-		private System.Windows.Forms.TextBox DepartmentOfEducationManager;
+		private System.Windows.Forms.TextBox doEManager;
 		private System.Windows.Forms.Label DepartmentOfEducationManagerLabel;
 		private System.Windows.Forms.RadioButton cityRadioButton;
 		private System.Windows.Forms.RadioButton districtRadioButton;
