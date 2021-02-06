@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
+using CsvHelper;
 
 namespace DarAlQuranLicense
 {
@@ -36,21 +37,21 @@ namespace DarAlQuranLicense
 
 		private readonly Bitmap ErrorImage;
 
-		private struct Student
+		private class Student_C
 		{
-			public string FirstName;
-			public string LastName;
+			public string FirstName { get; set; }
+			public string LastName { get; set; }
 
 			public string GetFullName()
 			{
 				return FirstName + " " + LastName;
 			}
 
-			public string FatherName;
-			public string Code;
+			public string FatherName { get; set; }
+			public string Code { get; set; }
 		}
-
-		private List<Student> students;
+		
+		private List<Student_C> students_C;
 
 		private readonly PersianCalendar persianCalendar = new PersianCalendar();
 
@@ -275,6 +276,11 @@ namespace DarAlQuranLicense
 
 		private void StudentsListAddress_TextChanged(object sender, EventArgs e)
 		{
+			using (StreamReader reader = new StreamReader(studentsListAddress.Text))
+			using (CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+			{
+				students_C = csv.GetRecords<Student_C>().ToList();
+			}
 			string[] fileLines = File.ReadAllLines(studentsListAddress.Text);
 
 			try
@@ -297,32 +303,16 @@ namespace DarAlQuranLicense
 				darAlQuranManager.Text = values[4] + ' ' + values[5];
 				DepartmentOfEducationManager.Text = values[6] + ' ' + values[7];
 
-				students = new List<Student>();
-				for (int i = 1; i < fileLines.Length; i++)
+				foreach (Student_C student in students_C)
 				{
-					values = fileLines[i].Split('،');
-
-					if (values.Length != 4) throw new ArgumentException("تعداد موارد در خط " + (i + 1).ToString() +
-							" در فایل لیست قرآن آموزان اشتباه است.");
-
-					Student student = new Student
+					if (student.FirstName == "" || student.LastName == "" || student.FatherName == "" || student.Code == "")
 					{
-						FirstName = values[0],
-						LastName = values[1],
-						FatherName = values[2],
-						Code = values[3]
-					};
-
-					if (student.FirstName == "") throw new ArgumentException("نام قرآن آموز در خط " + (i + 1).ToString() + " خالی است.");
-					if (student.LastName == "") throw new ArgumentException("نام خانوادگی قرآن آموز در خط " + (i + 1).ToString() + " خالی است.");
-					if (student.FatherName == "") throw new ArgumentException("نام پدر قرآن آموز در خط " + (i + 1).ToString() + " خالی است.");
-					if (student.Code == "") throw new ArgumentException("کد قرآن آموز در خط " + (i + 1).ToString() + " خالی است.");
-
-					students.Add(student);
+						throw new ArgumentException("بارگزاری مشخصات قرآن آموزان ناموفق بود.");
+					}
 				}
 				message.BackColor = SystemColors.Control;
 				message.Text = "لیست و مشخصات قرآن آموزان با موفقیت بارگذاری شد.";
-				foreach (Student student in students) studentName.Items.Add(student.FirstName + " " + student.LastName);
+				foreach (Student_C student in students_C) studentName.Items.Add(student.FirstName + " " + student.LastName);
 			}
 			catch (Exception ex)
 			{
@@ -334,9 +324,9 @@ namespace DarAlQuranLicense
 
 		private void ShowStudentInfo(object sender, EventArgs e)
 		{
-			if (students != null)
+			if (students_C != null)
 			{
-				foreach (Student student in students)
+				foreach (Student_C student in students_C)
 				{
 					if ((sender == studentName && studentName.Text == student.GetFullName())
 						|| (sender == studentCode && studentCode.Text.EnglishNumbersToPersian() == student.Code.EnglishNumbersToPersian()))
