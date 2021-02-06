@@ -123,7 +123,6 @@ namespace DarAlQuranLicense
 			level.SelectedIndex = 0;
 			score.SelectedIndex = 0;
 			background.SelectedIndex = 0;
-			saveAddress.Text = Path.GetFullPath("گواهینامه ها");
 
 			DateTime now = DateTime.Today;
 
@@ -283,17 +282,6 @@ namespace DarAlQuranLicense
 			}
 
 			return destImage;
-		}
-
-		private void SaveAddressBrowse_Click(object sender, EventArgs e)
-		{
-			CommonOpenFileDialog fileDialog = new CommonOpenFileDialog
-			{
-				Multiselect = false,
-				EnsurePathExists = true,
-				IsFolderPicker = true
-			};
-			if (fileDialog.ShowDialog() == CommonFileDialogResult.Ok) saveAddress.Text = fileDialog.FileName;
 		}
 
 		private void LevelRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -559,7 +547,7 @@ namespace DarAlQuranLicense
 					}
 				}
 				monthString = monthString.Trim();
-				string dir = Path.Combine(saveAddress.Text, date.Text.Split('/')[0].PersianNumbersToEnglish(), monthString, levelRadioButton.Checked ? "سطح " + level.Text : customLicenseText.Text);
+				string dir = Path.Combine("گواهینامه‌ها", date.Text.Split('/')[0].EnglishNumbersToPersian(), monthString, levelRadioButton.Checked ? "سطح " + level.Text : customLicenseText.Text);
 				if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 				bitmap.Save(Path.Combine(dir, studentName.Text + "(" + studentCode.Text.EnglishNumbersToPersian() + ").jpg"), ImageFormat.Jpeg);
 				message.Text += "گواهینامه با موفقیت ایجاد شد.";

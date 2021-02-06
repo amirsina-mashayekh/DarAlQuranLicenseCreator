@@ -65,9 +65,6 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.message = new System.Windows.Forms.TextBox();
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-			this.saveLabel = new System.Windows.Forms.Label();
-			this.saveAddress = new System.Windows.Forms.TextBox();
-			this.saveAddressBrowse = new System.Windows.Forms.Button();
 			this.helpButton = new System.Windows.Forms.Button();
 			this.date = new System.Windows.Forms.MaskedTextBox();
 			this.studentInfoBox.SuspendLayout();
@@ -490,41 +487,6 @@
 			this.toolTip.InitialDelay = 500;
 			this.toolTip.ReshowDelay = 100;
 			// 
-			// saveLabel
-			// 
-			this.saveLabel.AutoSize = true;
-			this.saveLabel.Cursor = System.Windows.Forms.Cursors.Help;
-			this.saveLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.saveLabel.Location = new System.Drawing.Point(7, 219);
-			this.saveLabel.Name = "saveLabel";
-			this.saveLabel.Size = new System.Drawing.Size(62, 22);
-			this.saveLabel.TabIndex = 8;
-			this.saveLabel.Text = "ذخیره در:";
-			this.toolTip.SetToolTip(this.saveLabel, "پوشه‌ی مورد نظر جهت ذخیره‌ی گواهینامه‌ها را با استفاده از دکمه‌ی «جستجو...» انتخا" +
-        "ب کنید.");
-			// 
-			// saveAddress
-			// 
-			this.saveAddress.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.saveAddress.Location = new System.Drawing.Point(75, 216);
-			this.saveAddress.Name = "saveAddress";
-			this.saveAddress.ReadOnly = true;
-			this.saveAddress.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.saveAddress.Size = new System.Drawing.Size(306, 28);
-			this.saveAddress.TabIndex = 13;
-			this.saveAddress.TabStop = false;
-			// 
-			// saveAddressBrowse
-			// 
-			this.saveAddressBrowse.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.saveAddressBrowse.Location = new System.Drawing.Point(387, 213);
-			this.saveAddressBrowse.Name = "saveAddressBrowse";
-			this.saveAddressBrowse.Size = new System.Drawing.Size(85, 32);
-			this.saveAddressBrowse.TabIndex = 11;
-			this.saveAddressBrowse.Text = "جستجو...";
-			this.saveAddressBrowse.UseVisualStyleBackColor = true;
-			this.saveAddressBrowse.Click += new System.EventHandler(this.SaveAddressBrowse_Click);
-			// 
 			// helpButton
 			// 
 			this.helpButton.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
@@ -560,14 +522,11 @@
 			this.Controls.Add(this.message);
 			this.Controls.Add(this.helpButton);
 			this.Controls.Add(this.studentInfoBox);
-			this.Controls.Add(this.saveAddressBrowse);
 			this.Controls.Add(this.doEManager);
 			this.Controls.Add(this.DepartmentOfEducationManagerLabel);
-			this.Controls.Add(this.saveLabel);
 			this.Controls.Add(this.dQManager);
 			this.Controls.Add(this.darAlQuranManagerLabel);
 			this.Controls.Add(this.dateLabel);
-			this.Controls.Add(this.saveAddress);
 			this.Controls.Add(this.number);
 			this.Controls.Add(this.numberLabel);
 			this.Controls.Add(this.dQName);
@@ -623,9 +582,6 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ToolTip toolTip;
 		private System.Windows.Forms.PictureBox studentPicture;
-		private System.Windows.Forms.TextBox saveAddress;
-		private System.Windows.Forms.Label saveLabel;
-		private System.Windows.Forms.Button saveAddressBrowse;
 		private System.Windows.Forms.Button helpButton;
 		private System.Windows.Forms.ComboBox level;
 		private System.Windows.Forms.TextBox message;
