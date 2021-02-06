@@ -44,9 +44,6 @@
 			this.DepartmentOfEducationManagerLabel = new System.Windows.Forms.Label();
 			this.cityRadioButton = new System.Windows.Forms.RadioButton();
 			this.districtRadioButton = new System.Windows.Forms.RadioButton();
-			this.studentsListAddress = new System.Windows.Forms.TextBox();
-			this.studentsListFileLabel = new System.Windows.Forms.Label();
-			this.studentsListBrowse = new System.Windows.Forms.Button();
 			this.studentsPicturesAddress = new System.Windows.Forms.TextBox();
 			this.studentsPicturesLabel = new System.Windows.Forms.Label();
 			this.studentsPicturesBrowse = new System.Windows.Forms.Button();
@@ -226,42 +223,6 @@
 			this.districtRadioButton.TabIndex = 8;
 			this.districtRadioButton.Text = "/   منطقه";
 			this.districtRadioButton.UseVisualStyleBackColor = true;
-			// 
-			// studentsListAddress
-			// 
-			this.studentsListAddress.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.studentsListAddress.Location = new System.Drawing.Point(158, 148);
-			this.studentsListAddress.Name = "studentsListAddress";
-			this.studentsListAddress.ReadOnly = true;
-			this.studentsListAddress.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.studentsListAddress.Size = new System.Drawing.Size(223, 28);
-			this.studentsListAddress.TabIndex = 11;
-			this.studentsListAddress.TabStop = false;
-			this.studentsListAddress.TextChanged += new System.EventHandler(this.StudentsListAddress_TextChanged);
-			// 
-			// studentsListFileLabel
-			// 
-			this.studentsListFileLabel.AutoSize = true;
-			this.studentsListFileLabel.Cursor = System.Windows.Forms.Cursors.Help;
-			this.studentsListFileLabel.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.studentsListFileLabel.Location = new System.Drawing.Point(7, 151);
-			this.studentsListFileLabel.Name = "studentsListFileLabel";
-			this.studentsListFileLabel.Size = new System.Drawing.Size(145, 22);
-			this.studentsListFileLabel.TabIndex = 8;
-			this.studentsListFileLabel.Text = "فایل لیست قرآن آموزان:";
-			this.toolTip.SetToolTip(this.studentsListFileLabel, "در صورت تمایل به استفاده از قابلیت پر کردن خودکار، فایل شامل لیست \r\nو مشخصات قرآن" +
-        " آموزان را با استفاده از دکمه‌ی «جستجو...» انتخاب کنید.");
-			// 
-			// studentsListBrowse
-			// 
-			this.studentsListBrowse.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.studentsListBrowse.Location = new System.Drawing.Point(387, 145);
-			this.studentsListBrowse.Name = "studentsListBrowse";
-			this.studentsListBrowse.Size = new System.Drawing.Size(85, 32);
-			this.studentsListBrowse.TabIndex = 9;
-			this.studentsListBrowse.Text = "جستجو...";
-			this.studentsListBrowse.UseVisualStyleBackColor = true;
-			this.studentsListBrowse.Click += new System.EventHandler(this.StudentsListBrowse_Click);
 			// 
 			// studentsPicturesAddress
 			// 
@@ -636,7 +597,6 @@
 			this.Controls.Add(this.studentInfoBox);
 			this.Controls.Add(this.saveAddressBrowse);
 			this.Controls.Add(this.studentsPicturesBrowse);
-			this.Controls.Add(this.studentsListBrowse);
 			this.Controls.Add(this.districtRadioButton);
 			this.Controls.Add(this.cityRadioButton);
 			this.Controls.Add(this.DepartmentOfEducationManager);
@@ -645,13 +605,11 @@
 			this.Controls.Add(this.darAlQuranManager);
 			this.Controls.Add(this.studentsPicturesLabel);
 			this.Controls.Add(this.darAlQuranManagerLabel);
-			this.Controls.Add(this.studentsListFileLabel);
 			this.Controls.Add(this.dateLabel);
 			this.Controls.Add(this.saveAddress);
 			this.Controls.Add(this.number);
 			this.Controls.Add(this.studentsPicturesAddress);
 			this.Controls.Add(this.numberLabel);
-			this.Controls.Add(this.studentsListAddress);
 			this.Controls.Add(this.darAlQuran);
 			this.Controls.Add(this.darAlQuranLabel);
 			this.Controls.Add(this.city);
@@ -692,9 +650,6 @@
 		private System.Windows.Forms.Label DepartmentOfEducationManagerLabel;
 		private System.Windows.Forms.RadioButton cityRadioButton;
 		private System.Windows.Forms.RadioButton districtRadioButton;
-		private System.Windows.Forms.TextBox studentsListAddress;
-		private System.Windows.Forms.Label studentsListFileLabel;
-		private System.Windows.Forms.Button studentsListBrowse;
 		private System.Windows.Forms.TextBox studentsPicturesAddress;
 		private System.Windows.Forms.Label studentsPicturesLabel;
 		private System.Windows.Forms.Button studentsPicturesBrowse;

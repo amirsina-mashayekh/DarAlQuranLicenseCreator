@@ -50,8 +50,22 @@ namespace DarAlQuranLicense
 			public string FatherName { get; set; }
 			public string Code { get; set; }
 		}
-		
+
 		private List<Student_C> students_C;
+
+		private class DarAlQuranInfo
+		{
+			public string Province { get; set; }
+			public bool IsCity { get; set; }
+			public string Region { get; set; }
+			public string DQName { get; set; }
+			public string DQMFirstName { get; set; }
+			public string DQMLastName { get; set; }
+			public string DoEMFirstName { get; set; }
+			public string DoEMLastName { get; set; }
+		}
+
+		private DarAlQuranInfo darAlQuranInfo;
 
 		private readonly PersianCalendar persianCalendar = new PersianCalendar();
 
@@ -109,7 +123,6 @@ namespace DarAlQuranLicense
 			level.SelectedIndex = 0;
 			score.SelectedIndex = 0;
 			background.SelectedIndex = 0;
-			if (File.Exists("لیست قرآن آموزان.txt")) studentsListAddress.Text = Path.GetFullPath("لیست قرآن آموزان.txt");
 			if (Directory.Exists("عکس قرآن آموزان")) studentsPicturesAddress.Text = Path.GetFullPath("عکس قرآن آموزان");
 			saveAddress.Text = Path.GetFullPath("گواهینامه ها");
 
@@ -120,6 +133,57 @@ namespace DarAlQuranLicense
 				persianCalendar.GetMonth(now).ToString() + '/' +
 				persianCalendar.GetDayOfMonth(now)
 				).EnglishNumbersToPersian();
+
+			try
+			{
+				using (StreamReader reader = new StreamReader("info.csv"))
+				using (CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+				{
+					darAlQuranInfo = csv.GetRecords<DarAlQuranInfo>().ToList()[0];
+				}
+
+				province.Text = darAlQuranInfo.Province;
+				if (!darAlQuranInfo.IsCity)
+				{
+					cityRadioButton.Checked = false;
+					districtRadioButton.Checked = true;
+				}
+				city.Text = darAlQuranInfo.Region;
+				darAlQuran.Text = darAlQuranInfo.DQName;
+				darAlQuranManager.Text = darAlQuranInfo.DQMFirstName + ' ' + darAlQuranInfo.DQMLastName;
+				DepartmentOfEducationManager.Text = darAlQuranInfo.DoEMFirstName + ' ' + darAlQuranInfo.DoEMLastName;
+			}
+			catch (Exception)
+			{
+				message.BackColor = Color.IndianRed;
+				message.Text = "خطا در بارگزاری اطلاعات دارالقرآن";
+			}
+
+			try
+			{
+				using (StreamReader reader = new StreamReader("students.csv"))
+				using (CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+				{
+					students_C = csv.GetRecords<Student_C>().ToList();
+				}
+
+				foreach (Student_C student in students_C)
+				{
+					if (student.FirstName == "" || student.LastName == "" || student.FatherName == "" || student.Code == "")
+					{
+						throw new ArgumentException();
+					}
+					studentName.Items.Add(student.FirstName + " " + student.LastName);
+				}
+				message.BackColor = SystemColors.Control;
+				message.Text = "لیست و مشخصات قرآن آموزان با موفقیت بارگذاری شد.";
+			}
+			catch (Exception)
+			{
+				message.BackColor = Color.IndianRed;
+				message.Text = "خطا در بارگزاری اطلاعات قرآن آموزان";
+				studentName.Items.Clear();
+			}
 		}
 
 		private void SetAllControlsFont(Control.ControlCollection ctrls)
@@ -222,20 +286,6 @@ namespace DarAlQuranLicense
 			return destImage;
 		}
 
-		private void StudentsListBrowse_Click(object sender, EventArgs e)
-		{
-			CommonOpenFileDialog fileDialog = new CommonOpenFileDialog
-			{
-				Multiselect = false,
-				EnsureFileExists = true
-			};
-			fileDialog.Filters.Add(new CommonFileDialogFilter("Text Files", "*.txt"));
-
-			if (fileDialog.ShowDialog() != CommonFileDialogResult.Ok) return;
-
-			studentsListAddress.Text = fileDialog.FileName;
-		}
-
 		private void StudentsPicturesBrowse_Click(object sender, EventArgs e)
 		{
 			CommonOpenFileDialog fileDialog = new CommonOpenFileDialog
@@ -271,54 +321,6 @@ namespace DarAlQuranLicense
 				level.Enabled = false;
 				customLicenseText.Enabled = true;
 				background.Enabled = true;
-			}
-		}
-
-		private void StudentsListAddress_TextChanged(object sender, EventArgs e)
-		{
-			using (StreamReader reader = new StreamReader(studentsListAddress.Text))
-			using (CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-			{
-				students_C = csv.GetRecords<Student_C>().ToList();
-			}
-			string[] fileLines = File.ReadAllLines(studentsListAddress.Text);
-
-			try
-			{
-				if (fileLines.Length < 1) throw new ArgumentException("فایل خالی است.");
-
-				if (!(fileLines[0].StartsWith("//") && fileLines[0].EndsWith("//"))) throw new ArgumentException("خط اول فایل باید با // شروع و تمام شود.");
-				string[] values = fileLines[0].Trim('/').Split('،');
-				if (values.Length != 8) throw new ArgumentException("تعداد موارد در خط اول " +
-							 " در فایل لیست قرآن آموزان اشتباه است.");
-				if (values[1] == "م")
-				{
-					cityRadioButton.Checked = false;
-					districtRadioButton.Checked = true;
-				}
-				else if (values[1] != "ش") throw new ArgumentException("مورد دوم در خط اول در فایل لیست قرآن آموزان باید «ش» یا «م» (ش برای شهرستان و م برای منطقه) باشد.");
-				province.Text = values[0];
-				city.Text = values[2];
-				darAlQuran.Text = values[3];
-				darAlQuranManager.Text = values[4] + ' ' + values[5];
-				DepartmentOfEducationManager.Text = values[6] + ' ' + values[7];
-
-				foreach (Student_C student in students_C)
-				{
-					if (student.FirstName == "" || student.LastName == "" || student.FatherName == "" || student.Code == "")
-					{
-						throw new ArgumentException("بارگزاری مشخصات قرآن آموزان ناموفق بود.");
-					}
-				}
-				message.BackColor = SystemColors.Control;
-				message.Text = "لیست و مشخصات قرآن آموزان با موفقیت بارگذاری شد.";
-				foreach (Student_C student in students_C) studentName.Items.Add(student.FirstName + " " + student.LastName);
-			}
-			catch (Exception ex)
-			{
-				message.BackColor = Color.IndianRed;
-				message.Text = "خطا: " + ex.Message;
-				studentName.Items.Clear();
 			}
 		}
 
@@ -610,7 +612,7 @@ namespace DarAlQuranLicense
 					text = text.Replace(text[i], (char)(text[i] + '۰' - '0'));
 			return text;
 		}
-		
+
 		public static string PersianNumbersToEnglish(this string text)
 		{
 			for (int i = 0; i < text.Length; i++) if (text[i] >= '۰' && text[i] <= '۹')
