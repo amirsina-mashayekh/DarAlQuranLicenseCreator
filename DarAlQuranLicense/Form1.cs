@@ -263,20 +263,11 @@ namespace DarAlQuranLicense
 			return destImage;
 		}
 
-		private void UpdateDQInfo(object sender, EventArgs e)
+		private Bitmap LoadBitmapUnlocked(string fileName)
 		{
-			darAlQuranInfo.Province = province.Text;
-			darAlQuranInfo.IsCity = cityRadioButton.Checked;
-			darAlQuranInfo.Region = region.Text;
-			darAlQuranInfo.DQName = dQName.Text;
-			darAlQuranInfo.DQManager = dQManager.Text;
-			darAlQuranInfo.DoEManager = doEManager.Text;
-
-			using (StreamWriter writer = new StreamWriter("info.csv"))
-			using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+			using (Bitmap bmp = new Bitmap(fileName))
 			{
-				List<DarAlQuranInfo> records = new List<DarAlQuranInfo> { darAlQuranInfo };
-				csv.WriteRecords(records);
+				return new Bitmap(bmp);
 			}
 		}
 
@@ -307,21 +298,68 @@ namespace DarAlQuranLicense
 			{
 				csv.WriteRecords(students);
 			}
+
+			studentName.Items.Clear();
+			foreach (Student st in students)
+			{
+				studentName.Items.Add(st.Name);
+			}
 		}
 
-		private void LevelRadioButton_CheckedChanged(object sender, EventArgs e)
+		private void GetStudentImage()
 		{
-			if (levelRadioButton.Checked)
+			OpenFileDialog openFile = new OpenFileDialog
 			{
-				level.Enabled = true;
-				customLicenseText.Enabled = false;
-				background.Enabled = false;
+				Title = "Open Student Picture",
+				Multiselect = false,
+				CheckFileExists = true,
+				Filter = "All Supported Picture Files|*.bmp;*.gif;*.jpeg;*.jpg;*.png;*.tif;*.tiff"
+			};
+			if (openFile.ShowDialog() != DialogResult.OK) return;
+
+			Bitmap image;
+			try
+			{
+				image = LoadBitmapUnlocked(openFile.FileName);
 			}
-			else
+			catch (Exception)
 			{
-				level.Enabled = false;
-				customLicenseText.Enabled = true;
-				background.Enabled = true;
+				message.BackColor = Color.IndianRed;
+				message.Text = "خطا در بارگذاری عکس قرآن آموز.";
+				studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
+				studentPicture.Image = ErrorImage;
+				return;
+			}
+
+			float ratio = image.Width / (float)image.Height;
+			if (ratio > 0.8 || ratio < 0.7)
+			{
+				message.BackColor = Color.IndianRed;
+				message.Text = "نسبت عرض به ارتفاع عکس قرآن آموز باید بین ۰/۷ و ۰/۸ (سه در چهار) باشد.";
+				studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
+				studentPicture.Image = ErrorImage;
+				return;
+			}
+			studentPicture.SizeMode = PictureBoxSizeMode.StretchImage;
+			studentPicture.Image = ResizeImage(image, 285, 380);
+			hasPicture = true;
+			studentPicture.Image.Save("pictures/" + studentCode.Text.EnglishNumbersToPersian() + ".jpg", ImageFormat.Jpeg);
+		}
+
+		private void UpdateDQInfo(object sender, EventArgs e)
+		{
+			darAlQuranInfo.Province = province.Text;
+			darAlQuranInfo.IsCity = cityRadioButton.Checked;
+			darAlQuranInfo.Region = region.Text;
+			darAlQuranInfo.DQName = dQName.Text;
+			darAlQuranInfo.DQManager = dQManager.Text;
+			darAlQuranInfo.DoEManager = doEManager.Text;
+
+			using (StreamWriter writer = new StreamWriter("info.csv"))
+			using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+			{
+				List<DarAlQuranInfo> records = new List<DarAlQuranInfo> { darAlQuranInfo };
+				csv.WriteRecords(records);
 			}
 		}
 
@@ -370,10 +408,10 @@ namespace DarAlQuranLicense
 					return; 
 				}
 
-				Image image;
+				Bitmap image;
 				try
 				{
-					image = Image.FromFile(path);
+					image = LoadBitmapUnlocked(path);
 				}
 				catch (Exception)
 				{
@@ -399,6 +437,22 @@ namespace DarAlQuranLicense
 					fatherName.Clear();
 					studentCode.Clear();
 				}
+			}
+		}
+
+		private void LevelRadioButton_CheckedChanged(object sender, EventArgs e)
+		{
+			if (levelRadioButton.Checked)
+			{
+				level.Enabled = true;
+				customLicenseText.Enabled = false;
+				background.Enabled = false;
+			}
+			else
+			{
+				level.Enabled = false;
+				customLicenseText.Enabled = true;
+				background.Enabled = true;
 			}
 		}
 
@@ -540,7 +594,7 @@ namespace DarAlQuranLicense
 
 				if (hasPicture)
 				{
-					Bitmap picture = ResizeImage(studentPicture.Image, 285, 380);
+					Bitmap picture = (Bitmap)studentPicture.Image;
 					picture.SetResolution(96, 96);
 					graphics.DrawImage(picture, 438, 366);
 				}
@@ -601,44 +655,46 @@ namespace DarAlQuranLicense
 			}
 		}
 
-		private void GetStudentImage()
+		private void DeleteStudent_Click(object sender, EventArgs e)
 		{
-			OpenFileDialog openFile = new OpenFileDialog
+			foreach (Student student in students)
 			{
-				Title = "Open Student Picture",
-				Multiselect = false,
-				CheckFileExists = true,
-				Filter = "All Supported Picture Files|*.bmp;*.gif;*.jpeg;*.jpg;*.png;*.tif;*.tiff"
-			};
-			if (openFile.ShowDialog() != DialogResult.OK) return;
+				if (student.Code == studentCode.Text)
+				{
+					students.Remove(student);
+					string picturePath = "pictures/" + studentCode.Text.EnglishNumbersToPersian() + ".jpg";
+					if (File.Exists(picturePath))
+					{
+						studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
+						studentPicture.Image = DefaultImage;
+						File.Delete(picturePath);
+					}
+					studentName.Text = fatherName.Text = studentCode.Text = "";
+					
+					using (StreamWriter writer = new StreamWriter("students.csv"))
+					using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+					{
+						csv.WriteRecords(students);
+					}
 
-			Image image;
-			try
-			{
-				image = Image.FromFile(openFile.FileName);
-			}
-			catch (Exception)
-			{
-				message.BackColor = Color.IndianRed;
-				message.Text = "خطا در بارگذاری عکس قرآن آموز.";
-				studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
-				studentPicture.Image = ErrorImage;
-				return;
-			}
+					studentName.Items.Clear();
+					foreach (Student st in students)
+					{
+						studentName.Items.Add(st.Name);
+					}
 
-			float ratio = image.Width / (float)image.Height;
-			if (ratio > 0.8 || ratio < 0.7)
-			{
-				message.BackColor = Color.IndianRed;
-				message.Text = "نسبت عرض به ارتفاع عکس قرآن آموز باید بین ۰/۷ و ۰/۸ (سه در چهار) باشد.";
-				studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
-				studentPicture.Image = ErrorImage;
-				return;
+					message.BackColor = SystemColors.Control;
+					message.Text = "قرآن آموز حذف شد.";
+					return;
+				}
 			}
-			studentPicture.SizeMode = PictureBoxSizeMode.StretchImage;
-			studentPicture.Image = image;
-			hasPicture = true;
-			studentPicture.Image.Save("pictures/" + studentCode.Text.EnglishNumbersToPersian() + ".jpg", ImageFormat.Jpeg);
+			message.BackColor = Color.IndianRed;
+			message.Text = "خطا در حذف قرآن آموز";
+		}
+
+		private void ChangePicture_Click(object sender, EventArgs e)
+		{
+			GetStudentImage();
 		}
 	}
 

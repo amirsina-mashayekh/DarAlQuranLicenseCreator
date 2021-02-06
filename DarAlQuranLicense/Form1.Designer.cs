@@ -46,6 +46,8 @@
 			this.districtRadioButton = new System.Windows.Forms.RadioButton();
 			this.studentInfoBox = new System.Windows.Forms.GroupBox();
 			this.background = new System.Windows.Forms.ComboBox();
+			this.changePicture = new System.Windows.Forms.Button();
+			this.deleteStudent = new System.Windows.Forms.Button();
 			this.generate = new System.Windows.Forms.Button();
 			this.dateCheckBox = new System.Windows.Forms.CheckBox();
 			this.studentPicture = new System.Windows.Forms.PictureBox();
@@ -228,6 +230,8 @@
 			// studentInfoBox
 			// 
 			this.studentInfoBox.Controls.Add(this.background);
+			this.studentInfoBox.Controls.Add(this.changePicture);
+			this.studentInfoBox.Controls.Add(this.deleteStudent);
 			this.studentInfoBox.Controls.Add(this.generate);
 			this.studentInfoBox.Controls.Add(this.dateCheckBox);
 			this.studentInfoBox.Controls.Add(this.studentPicture);
@@ -275,6 +279,28 @@
 			this.background.Size = new System.Drawing.Size(89, 29);
 			this.background.TabIndex = 36;
 			this.toolTip.SetToolTip(this.background, "طرح زمینه مورد نظر را انتخاب کنید.");
+			// 
+			// changePicture
+			// 
+			this.changePicture.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+			this.changePicture.Location = new System.Drawing.Point(136, 201);
+			this.changePicture.Name = "changePicture";
+			this.changePicture.Size = new System.Drawing.Size(86, 30);
+			this.changePicture.TabIndex = 35;
+			this.changePicture.Text = "تغییر عکس";
+			this.changePicture.UseVisualStyleBackColor = true;
+			this.changePicture.Click += new System.EventHandler(this.ChangePicture_Click);
+			// 
+			// deleteStudent
+			// 
+			this.deleteStudent.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+			this.deleteStudent.Location = new System.Drawing.Point(228, 201);
+			this.deleteStudent.Name = "deleteStudent";
+			this.deleteStudent.Size = new System.Drawing.Size(110, 30);
+			this.deleteStudent.TabIndex = 35;
+			this.deleteStudent.Text = "حذف قرآن آموز";
+			this.deleteStudent.UseVisualStyleBackColor = true;
+			this.deleteStudent.Click += new System.EventHandler(this.DeleteStudent_Click);
 			// 
 			// generate
 			// 
@@ -599,6 +625,8 @@
 		private System.Windows.Forms.Button generate;
 		private System.Windows.Forms.ComboBox background;
 		private System.Windows.Forms.MaskedTextBox date;
+		private System.Windows.Forms.Button changePicture;
+		private System.Windows.Forms.Button deleteStudent;
 	}
 }
 
