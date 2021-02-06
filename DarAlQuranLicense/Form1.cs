@@ -37,21 +37,14 @@ namespace DarAlQuranLicense
 
 		private readonly Bitmap ErrorImage;
 
-		private class Student_C
+		private class Student
 		{
-			public string FirstName { get; set; }
-			public string LastName { get; set; }
-
-			public string GetFullName()
-			{
-				return FirstName + " " + LastName;
-			}
-
+			public string Name { get; set; }
 			public string FatherName { get; set; }
 			public string Code { get; set; }
 		}
 
-		private readonly List<Student_C> students_C;
+		private readonly List<Student> students;
 
 		private class DarAlQuranInfo
 		{
@@ -158,10 +151,10 @@ namespace DarAlQuranLicense
 				using (StreamReader reader = new StreamReader("students.csv"))
 				using (CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture))
 				{
-					students_C = csv.GetRecords<Student_C>().ToList();
+					students = csv.GetRecords<Student>().ToList();
 				}
 
-				foreach (Student_C student in students_C) studentName.Items.Add(student.FirstName + " " + student.LastName);
+				foreach (Student student in students) studentName.Items.Add(student.Name);
 				message.BackColor = SystemColors.Control;
 				message.Text = "لیست و مشخصات قرآن آموزان با موفقیت بارگذاری شد.";
 			}
@@ -290,6 +283,35 @@ namespace DarAlQuranLicense
 			}
 		}
 
+		private void UpdateStudents()
+		{
+			if (studentCode.Text == "") return;
+
+			bool newStudent = true;
+
+			foreach (Student student in students)
+			{
+				if (student.Code == studentCode.Text)
+				{
+					student.Name = studentName.Text;
+					student.FatherName = fatherName.Text;
+					newStudent = false;
+					break;
+				}
+			}
+
+			if (newStudent)
+			{
+				students.Add(new Student { Name = studentName.Text, FatherName = fatherName.Text, Code = studentCode.Text });
+			}
+
+			using (StreamWriter writer = new StreamWriter("students.csv"))
+			using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+			{
+				csv.WriteRecords(students);
+			}
+		}
+
 		private void LevelRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
 			if (levelRadioButton.Checked)
@@ -308,14 +330,14 @@ namespace DarAlQuranLicense
 
 		private void ShowStudentInfo(object sender, EventArgs e)
 		{
-			if (students_C != null)
+			if (students != null)
 			{
-				foreach (Student_C student in students_C)
+				foreach (Student student in students)
 				{
-					if ((sender == studentName && studentName.Text == student.GetFullName())
-						|| (sender == studentCode && studentCode.Text.EnglishNumbersToPersian() == student.Code.EnglishNumbersToPersian()))
+					if ((sender == studentName && studentName.Text == student.Name)
+						|| (sender == studentCode && studentCode.Text.PersianNumbersToEnglish() == student.Code.PersianNumbersToEnglish()))
 					{
-						studentName.Text = student.GetFullName();
+						studentName.Text = student.Name;
 						fatherName.Text = student.FatherName;
 						studentCode.Text = student.Code;
 						break;
@@ -326,62 +348,62 @@ namespace DarAlQuranLicense
 			hasPicture = false;
 			if (studentName.Text.Length > 0)
 			{
-				string[] files = Directory.GetFiles("pictures");
-				string path = "";
-				foreach (string file in files)
-				{
-					if (Path.GetFileNameWithoutExtension(file).EnglishNumbersToPersian() == studentCode.Text.EnglishNumbersToPersian())
-					{
-						path = file;
-						goto ImageFound;
-					}
-				}
+			//	string[] files = Directory.GetFiles("pictures");
+			//	string path = "";
+			//	foreach (string file in files)
+			//	{
+			//		if (Path.GetFileNameWithoutExtension(file).EnglishNumbersToPersian() == studentCode.Text.EnglishNumbersToPersian())
+			//		{
+			//			path = file;
+			//			goto ImageFound;
+			//		}
+			//	}
 
-				message.BackColor = Color.LightYellow;
-				message.Text = "توجه: عکس قرآن آموز یافت نشد. گواهینامه بدون عکس خواهد بود.";
-				studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
-				studentPicture.Image = NAImage;
-				return;
+			//	message.BackColor = Color.LightYellow;
+			//	message.Text = "توجه: عکس قرآن آموز یافت نشد. گواهینامه بدون عکس خواهد بود.";
+			//	studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
+			//	studentPicture.Image = NAImage;
+			//	return;
 
-			ImageFound:
+			//ImageFound:
 
-				if (!new string[] { ".jpg", ".png", ".gif", ".jpeg", ".bmp", ".jpe", ".jfif", ".bmp", ".dib", ".tif", ".tiff" }.Contains(Path.GetExtension(path)))
-				{
-					message.BackColor = Color.LightYellow;
-					message.Text = "توجه: فرمت عکس قرآن آموز پشتیبانی نمی‌شود. گواهینامه بدون عکس خواهد بود.";
-					studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
-					studentPicture.Image = ErrorImage;
-					return;
-				}
+			//	if (!new string[] { ".jpg", ".png", ".gif", ".jpeg", ".bmp", ".jpe", ".jfif", ".bmp", ".dib", ".tif", ".tiff" }.Contains(Path.GetExtension(path)))
+			//	{
+			//		message.BackColor = Color.LightYellow;
+			//		message.Text = "توجه: فرمت عکس قرآن آموز پشتیبانی نمی‌شود. گواهینامه بدون عکس خواهد بود.";
+			//		studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
+			//		studentPicture.Image = ErrorImage;
+			//		return;
+			//	}
 
-				Image image;
-				try
-				{
-					image = Image.FromFile(path);
-				}
-				catch (Exception)
-				{
-					message.BackColor = Color.LightYellow;
-					message.Text = "خطا در بارگذاری عکس قرآن آموز. گواهینامه بدون عکس خواهد بود.";
-					studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
-					studentPicture.Image = ErrorImage;
-					return;
-				}
+			//	Image image;
+			//	try
+			//	{
+			//		image = Image.FromFile(path);
+			//	}
+			//	catch (Exception)
+			//	{
+			//		message.BackColor = Color.LightYellow;
+			//		message.Text = "خطا در بارگذاری عکس قرآن آموز. گواهینامه بدون عکس خواهد بود.";
+			//		studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
+			//		studentPicture.Image = ErrorImage;
+			//		return;
+			//	}
 
-				float ratio = image.Width / (float)image.Height;
-				if (ratio > 0.8 || ratio < 0.7)
-				{
-					message.BackColor = Color.IndianRed;
-					message.Text = "نسبت عرض به ارتفاع عکس قرآن آموز باید بین ۰/۷ و ۰/۸ (سه در چهار) باشد. گواهینامه بدون عکس خواهد بود.";
-					studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
-					studentPicture.Image = ErrorImage;
-					return;
-				}
-				studentPicture.SizeMode = PictureBoxSizeMode.StretchImage;
-				studentPicture.Image = image;
-				message.BackColor = SystemColors.Control;
-				message.Text = "عکس قرآن آموز با موفقیت بارگذاری شد.";
-				hasPicture = true;
+			//	float ratio = image.Width / (float)image.Height;
+			//	if (ratio > 0.8 || ratio < 0.7)
+			//	{
+			//		message.BackColor = Color.IndianRed;
+			//		message.Text = "نسبت عرض به ارتفاع عکس قرآن آموز باید بین ۰/۷ و ۰/۸ (سه در چهار) باشد. گواهینامه بدون عکس خواهد بود.";
+			//		studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
+			//		studentPicture.Image = ErrorImage;
+			//		return;
+			//	}
+			//	studentPicture.SizeMode = PictureBoxSizeMode.StretchImage;
+			//	studentPicture.Image = image;
+			//	message.BackColor = SystemColors.Control;
+			//	message.Text = "عکس قرآن آموز با موفقیت بارگذاری شد.";
+			//	hasPicture = true;
 			}
 			else
 			{
@@ -557,6 +579,7 @@ namespace DarAlQuranLicense
 				if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 				bitmap.Save(Path.Combine(dir, studentName.Text + "(" + studentCode.Text.EnglishNumbersToPersian() + ").jpg"), ImageFormat.Jpeg);
 				message.Text += "گواهینامه با موفقیت ایجاد شد.";
+				UpdateStudents();
 			}
 			catch (Exception)
 			{
