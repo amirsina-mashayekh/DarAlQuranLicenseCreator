@@ -1,5 +1,4 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -64,7 +63,6 @@ namespace DarAlQuranLicense
 
 		public MainForm()
 		{
-			#region Initialize fonts
 
 			uint temp = 0;
 			byte[][] fontData = new byte[][] { Properties.Resources.Samim, Properties.Resources.IranNastaliq,
@@ -84,7 +82,6 @@ namespace DarAlQuranLicense
 			BNazanin = privateFontCollection.Families[1];
 			BKoodak = privateFontCollection.Families[0];
 
-			#endregion Initialize fonts
 
 			InitializeComponent();
 
@@ -330,6 +327,8 @@ namespace DarAlQuranLicense
 
 		private void ShowStudentInfo(object sender, EventArgs e)
 		{
+			message.Text = "";
+
 			if (students != null)
 			{
 				foreach (Student student in students)
@@ -346,64 +345,48 @@ namespace DarAlQuranLicense
 			}
 
 			hasPicture = false;
-			if (studentName.Text.Length > 0)
+			if (!Directory.Exists("pictures")) Directory.CreateDirectory("pictures");
+
+			if (studentCode.Text.Length > 0)
 			{
-			//	string[] files = Directory.GetFiles("pictures");
-			//	string path = "";
-			//	foreach (string file in files)
-			//	{
-			//		if (Path.GetFileNameWithoutExtension(file).EnglishNumbersToPersian() == studentCode.Text.EnglishNumbersToPersian())
-			//		{
-			//			path = file;
-			//			goto ImageFound;
-			//		}
-			//	}
+				string[] files = Directory.GetFiles("pictures");
+				string path = "";
+				bool notFound = true;
+				foreach (string file in files)
+				{
+					if (Path.GetFileName(file) == studentCode.Text.EnglishNumbersToPersian() + ".jpg")
+					{
+						path = file;
+						notFound = false;
+					}
+				}
 
-			//	message.BackColor = Color.LightYellow;
-			//	message.Text = "توجه: عکس قرآن آموز یافت نشد. گواهینامه بدون عکس خواهد بود.";
-			//	studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
-			//	studentPicture.Image = NAImage;
-			//	return;
+				if (notFound)
+				{
+					message.BackColor = Color.LightYellow;
+					message.Text = "توجه: عکس قرآن آموز یافت نشد.";
+					studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
+					studentPicture.Image = NAImage;
+					return; 
+				}
 
-			//ImageFound:
+				Image image;
+				try
+				{
+					image = Image.FromFile(path);
+				}
+				catch (Exception)
+				{
+					message.BackColor = Color.IndianRed;
+					message.Text = "خطا در بارگذاری عکس قرآن آموز.";
+					studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
+					studentPicture.Image = ErrorImage;
+					return;
+				}
 
-			//	if (!new string[] { ".jpg", ".png", ".gif", ".jpeg", ".bmp", ".jpe", ".jfif", ".bmp", ".dib", ".tif", ".tiff" }.Contains(Path.GetExtension(path)))
-			//	{
-			//		message.BackColor = Color.LightYellow;
-			//		message.Text = "توجه: فرمت عکس قرآن آموز پشتیبانی نمی‌شود. گواهینامه بدون عکس خواهد بود.";
-			//		studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
-			//		studentPicture.Image = ErrorImage;
-			//		return;
-			//	}
-
-			//	Image image;
-			//	try
-			//	{
-			//		image = Image.FromFile(path);
-			//	}
-			//	catch (Exception)
-			//	{
-			//		message.BackColor = Color.LightYellow;
-			//		message.Text = "خطا در بارگذاری عکس قرآن آموز. گواهینامه بدون عکس خواهد بود.";
-			//		studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
-			//		studentPicture.Image = ErrorImage;
-			//		return;
-			//	}
-
-			//	float ratio = image.Width / (float)image.Height;
-			//	if (ratio > 0.8 || ratio < 0.7)
-			//	{
-			//		message.BackColor = Color.IndianRed;
-			//		message.Text = "نسبت عرض به ارتفاع عکس قرآن آموز باید بین ۰/۷ و ۰/۸ (سه در چهار) باشد. گواهینامه بدون عکس خواهد بود.";
-			//		studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
-			//		studentPicture.Image = ErrorImage;
-			//		return;
-			//	}
-			//	studentPicture.SizeMode = PictureBoxSizeMode.StretchImage;
-			//	studentPicture.Image = image;
-			//	message.BackColor = SystemColors.Control;
-			//	message.Text = "عکس قرآن آموز با موفقیت بارگذاری شد.";
-			//	hasPicture = true;
+				studentPicture.SizeMode = PictureBoxSizeMode.StretchImage;
+				studentPicture.Image = image;
+				hasPicture = true;
 			}
 			else
 			{
@@ -545,6 +528,16 @@ namespace DarAlQuranLicense
 				if (doEManager.Text.Length > 0) FitAndDrawString(doEManager.Text, BNazanin37, RTLC, BlackBrush, ref graphics, 1175, 2875 - 15, 700);
 				else EmptyFields.Add("مدیر آموزش و پرورش");
 
+				if (!hasPicture)
+				{
+					DialogResult result = MessageBox.Show(
+						"عکس قرآن آموز یافت نشد. آیا مایل هستید عکس را انتخاب و بارگزاری کنید؟",
+						"توجه",
+						MessageBoxButtons.YesNo);
+
+					if (result == DialogResult.Yes) GetStudentImage();
+				}
+
 				if (hasPicture)
 				{
 					Bitmap picture = ResizeImage(studentPicture.Image, 285, 380);
@@ -606,6 +599,46 @@ namespace DarAlQuranLicense
 				message.BackColor = Color.IndianRed;
 				message.Text = "خطا در نمایش راهنما";
 			}
+		}
+
+		private void GetStudentImage()
+		{
+			OpenFileDialog openFile = new OpenFileDialog
+			{
+				Title = "Open Student Picture",
+				Multiselect = false,
+				CheckFileExists = true,
+				Filter = "All Supported Picture Files|*.bmp;*.gif;*.jpeg;*.jpg;*.png;*.tif;*.tiff"
+			};
+			if (openFile.ShowDialog() != DialogResult.OK) return;
+
+			Image image;
+			try
+			{
+				image = Image.FromFile(openFile.FileName);
+			}
+			catch (Exception)
+			{
+				message.BackColor = Color.IndianRed;
+				message.Text = "خطا در بارگذاری عکس قرآن آموز.";
+				studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
+				studentPicture.Image = ErrorImage;
+				return;
+			}
+
+			float ratio = image.Width / (float)image.Height;
+			if (ratio > 0.8 || ratio < 0.7)
+			{
+				message.BackColor = Color.IndianRed;
+				message.Text = "نسبت عرض به ارتفاع عکس قرآن آموز باید بین ۰/۷ و ۰/۸ (سه در چهار) باشد.";
+				studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
+				studentPicture.Image = ErrorImage;
+				return;
+			}
+			studentPicture.SizeMode = PictureBoxSizeMode.StretchImage;
+			studentPicture.Image = image;
+			hasPicture = true;
+			studentPicture.Image.Save("pictures/" + studentCode.Text.EnglishNumbersToPersian() + ".jpg", ImageFormat.Jpeg);
 		}
 	}
 

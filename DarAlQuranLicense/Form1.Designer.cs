@@ -305,6 +305,7 @@
 			// studentPicture
 			// 
 			this.studentPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.studentPicture.Cursor = System.Windows.Forms.Cursors.Default;
 			this.studentPicture.Location = new System.Drawing.Point(6, 135);
 			this.studentPicture.Name = "studentPicture";
 			this.studentPicture.Size = new System.Drawing.Size(72, 96);
