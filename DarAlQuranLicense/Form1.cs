@@ -51,7 +51,7 @@ namespace DarAlQuranLicense
 			public string Code { get; set; }
 		}
 
-		private List<Student_C> students_C;
+		private readonly List<Student_C> students_C;
 
 		private class DarAlQuranInfo
 		{
@@ -59,13 +59,11 @@ namespace DarAlQuranLicense
 			public bool IsCity { get; set; }
 			public string Region { get; set; }
 			public string DQName { get; set; }
-			public string DQMFirstName { get; set; }
-			public string DQMLastName { get; set; }
-			public string DoEMFirstName { get; set; }
-			public string DoEMLastName { get; set; }
+			public string DQManager { get; set; }
+			public string DoEManager { get; set; }
 		}
 
-		private DarAlQuranInfo darAlQuranInfo;
+		private readonly DarAlQuranInfo darAlQuranInfo;
 
 		private readonly PersianCalendar persianCalendar = new PersianCalendar();
 
@@ -103,7 +101,6 @@ namespace DarAlQuranLicense
 
 			Font = new Font(Samim, Font.Size);
 
-			#region Initialize images
 
 			DefaultImage = ConvertTextToImage("عکس\nقرآن آموز", Samim, 50, FontStyle.Regular,
 				new StringFormat { Alignment = StringAlignment.Center, FormatFlags = StringFormatFlags.DirectionRightToLeft },
@@ -117,7 +114,6 @@ namespace DarAlQuranLicense
 				new StringFormat { Alignment = StringAlignment.Center, FormatFlags = StringFormatFlags.DirectionRightToLeft },
 				studentPicture.Width, studentPicture.Height, 72, 72, Color.Transparent, Color.SlateGray);
 
-			#endregion Initialize images
 
 			studentPicture.Image = DefaultImage;
 			level.SelectedIndex = 0;
@@ -146,10 +142,10 @@ namespace DarAlQuranLicense
 					cityRadioButton.Checked = false;
 					districtRadioButton.Checked = true;
 				}
-				city.Text = darAlQuranInfo.Region;
+				region.Text = darAlQuranInfo.Region;
 				dQName.Text = darAlQuranInfo.DQName;
-				dQManager.Text = darAlQuranInfo.DQMFirstName + ' ' + darAlQuranInfo.DQMLastName;
-				doEManager.Text = darAlQuranInfo.DoEMFirstName + ' ' + darAlQuranInfo.DoEMLastName;
+				dQManager.Text = darAlQuranInfo.DQManager;
+				doEManager.Text = darAlQuranInfo.DoEManager;
 			}
 			catch (Exception)
 			{
@@ -165,14 +161,7 @@ namespace DarAlQuranLicense
 					students_C = csv.GetRecords<Student_C>().ToList();
 				}
 
-				foreach (Student_C student in students_C)
-				{
-					if (student.FirstName == "" || student.LastName == "" || student.FatherName == "" || student.Code == "")
-					{
-						throw new ArgumentException();
-					}
-					studentName.Items.Add(student.FirstName + " " + student.LastName);
-				}
+				foreach (Student_C student in students_C) studentName.Items.Add(student.FirstName + " " + student.LastName);
 				message.BackColor = SystemColors.Control;
 				message.Text = "لیست و مشخصات قرآن آموزان با موفقیت بارگذاری شد.";
 			}
@@ -282,6 +271,23 @@ namespace DarAlQuranLicense
 			}
 
 			return destImage;
+		}
+
+		private void UpdateDQInfo(object sender, EventArgs e)
+		{
+			darAlQuranInfo.Province = province.Text;
+			darAlQuranInfo.IsCity = cityRadioButton.Checked;
+			darAlQuranInfo.Region = region.Text;
+			darAlQuranInfo.DQName = dQName.Text;
+			darAlQuranInfo.DQManager = dQManager.Text;
+			darAlQuranInfo.DoEManager = doEManager.Text;
+
+			using (StreamWriter writer = new StreamWriter("info.csv"))
+			using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+			{
+				List<DarAlQuranInfo> records = new List<DarAlQuranInfo> { darAlQuranInfo };
+				csv.WriteRecords(records);
+			}
 		}
 
 		private void LevelRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -432,10 +438,10 @@ namespace DarAlQuranLicense
 				if (province.Text.Length > 0) FitAndDrawString("اداره کل آموزش و پرورش استان " + province.Text, IranNastaliq32, RTLC, BlackBrush, ref graphics, bitmap.Width / 2, 460);
 				else EmptyFields.Add("استان");
 
-				if (city.Text.Length > 0)
+				if (region.Text.Length > 0)
 				{
-					FitAndDrawString("اداره آموزش و پرورش " + (cityRadioButton.Checked ? "شهرستان " : "منطقه ") + city.Text, IranNastaliq32, RTLC, BlackBrush, ref graphics, bitmap.Width / 2, 540);
-					FitAndDrawString("منطقه / شهرستان " + city.Text, BNazanin37, RTLC, BlackBrush, ref graphics, 1175, 3025 - 15, 700);
+					FitAndDrawString("اداره آموزش و پرورش " + (cityRadioButton.Checked ? "شهرستان " : "منطقه ") + region.Text, IranNastaliq32, RTLC, BlackBrush, ref graphics, bitmap.Width / 2, 540);
+					FitAndDrawString("منطقه / شهرستان " + region.Text, BNazanin37, RTLC, BlackBrush, ref graphics, 1175, 3025 - 15, 700);
 				}
 				else EmptyFields.Add("شهرستان");
 

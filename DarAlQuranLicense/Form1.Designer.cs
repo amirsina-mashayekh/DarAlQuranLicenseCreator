@@ -31,7 +31,7 @@
 			this.components = new System.ComponentModel.Container();
 			this.provinceLabel = new System.Windows.Forms.Label();
 			this.province = new System.Windows.Forms.TextBox();
-			this.city = new System.Windows.Forms.TextBox();
+			this.region = new System.Windows.Forms.TextBox();
 			this.cityLabel = new System.Windows.Forms.Label();
 			this.dQName = new System.Windows.Forms.TextBox();
 			this.darAlQuranLabel = new System.Windows.Forms.Label();
@@ -88,14 +88,16 @@
 			this.province.Name = "province";
 			this.province.Size = new System.Drawing.Size(131, 28);
 			this.province.TabIndex = 0;
+			this.province.Leave += new System.EventHandler(this.UpdateDQInfo);
 			// 
-			// city
+			// region
 			// 
-			this.city.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.city.Location = new System.Drawing.Point(418, 6);
-			this.city.Name = "city";
-			this.city.Size = new System.Drawing.Size(129, 28);
-			this.city.TabIndex = 1;
+			this.region.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+			this.region.Location = new System.Drawing.Point(418, 6);
+			this.region.Name = "region";
+			this.region.Size = new System.Drawing.Size(129, 28);
+			this.region.TabIndex = 1;
+			this.region.Leave += new System.EventHandler(this.UpdateDQInfo);
 			// 
 			// cityLabel
 			// 
@@ -115,6 +117,7 @@
 			this.dQName.Size = new System.Drawing.Size(438, 28);
 			this.dQName.TabIndex = 2;
 			this.dQName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.dQName.Leave += new System.EventHandler(this.UpdateDQInfo);
 			// 
 			// darAlQuranLabel
 			// 
@@ -164,6 +167,7 @@
 			this.dQManager.Name = "dQManager";
 			this.dQManager.Size = new System.Drawing.Size(131, 28);
 			this.dQManager.TabIndex = 5;
+			this.dQManager.Leave += new System.EventHandler(this.UpdateDQInfo);
 			// 
 			// darAlQuranManagerLabel
 			// 
@@ -182,6 +186,7 @@
 			this.doEManager.Name = "doEManager";
 			this.doEManager.Size = new System.Drawing.Size(129, 28);
 			this.doEManager.TabIndex = 6;
+			this.doEManager.Leave += new System.EventHandler(this.UpdateDQInfo);
 			// 
 			// DepartmentOfEducationManagerLabel
 			// 
@@ -205,6 +210,7 @@
 			this.cityRadioButton.TabStop = true;
 			this.cityRadioButton.Text = "شهرستان /";
 			this.cityRadioButton.UseVisualStyleBackColor = true;
+			this.cityRadioButton.CheckedChanged += new System.EventHandler(this.UpdateDQInfo);
 			// 
 			// districtRadioButton
 			// 
@@ -217,6 +223,7 @@
 			this.districtRadioButton.TabIndex = 8;
 			this.districtRadioButton.Text = "منطقه";
 			this.districtRadioButton.UseVisualStyleBackColor = true;
+			this.districtRadioButton.CheckedChanged += new System.EventHandler(this.UpdateDQInfo);
 			// 
 			// studentInfoBox
 			// 
@@ -531,7 +538,7 @@
 			this.Controls.Add(this.numberLabel);
 			this.Controls.Add(this.dQName);
 			this.Controls.Add(this.darAlQuranLabel);
-			this.Controls.Add(this.city);
+			this.Controls.Add(this.region);
 			this.Controls.Add(this.province);
 			this.Controls.Add(this.provinceLabel);
 			this.Font = new System.Drawing.Font("Samim", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
@@ -555,7 +562,7 @@
 
 		private System.Windows.Forms.Label provinceLabel;
 		private System.Windows.Forms.TextBox province;
-		private System.Windows.Forms.TextBox city;
+		private System.Windows.Forms.TextBox region;
 		private System.Windows.Forms.Label cityLabel;
 		private System.Windows.Forms.TextBox dQName;
 		private System.Windows.Forms.Label darAlQuranLabel;
