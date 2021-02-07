@@ -26,6 +26,10 @@ namespace DarAlQuranLicense
 		
 		private readonly Color noticeColor = Color.LightSkyBlue;
 
+		private const string studentsFileName = "students";
+		
+		private const string dQInfoFileName = "info";
+
 		[System.Runtime.InteropServices.DllImport("gdi32.dll")]
 		private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
 			IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
@@ -127,48 +131,85 @@ namespace DarAlQuranLicense
 				persianCalendar.GetDayOfMonth(now)
 				).EnglishNumbersToPersian();
 
-			try
+			if (File.Exists(dQInfoFileName + ".csv"))
 			{
-				using (StreamReader reader = new StreamReader("info.csv"))
-				using (CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+				try
 				{
-					darAlQuranInfo = csv.GetRecords<DarAlQuranInfo>().ToList()[0];
-				}
+					using (StreamReader reader = new StreamReader(dQInfoFileName + ".csv"))
+					using (CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+					{
+						darAlQuranInfo = csv.GetRecords<DarAlQuranInfo>().ToList()[0];
+					}
 
-				province.Text = darAlQuranInfo.Province;
-				if (!darAlQuranInfo.IsCity)
+					province.Text = darAlQuranInfo.Province;
+					if (!darAlQuranInfo.IsCity)
+					{
+						cityRadioButton.Checked = false;
+						districtRadioButton.Checked = true;
+					}
+					region.Text = darAlQuranInfo.Region;
+					dQName.Text = darAlQuranInfo.DQName;
+					dQManager.Text = darAlQuranInfo.DQManager;
+					doEManager.Text = darAlQuranInfo.DoEManager;
+				}
+				catch (Exception)
 				{
-					cityRadioButton.Checked = false;
-					districtRadioButton.Checked = true;
+					message.BackColor = errorColor;
+					message.Text = "خطا در بارگزاری اطلاعات دارالقرآن. لطفا اطلاعات را دستی وارد کنید.\n";
+
+					if (File.Exists(dQInfoFileName + ".csv.BAK"))
+					{
+						int count = 1;
+						while (File.Exists(dQInfoFileName + count.ToString() + ".csv.BAK"))
+						{
+							count++;
+						}
+
+						File.Move(dQInfoFileName + ".csv", dQInfoFileName + count.ToString() + ".csv.BAK");
+					}
+					else File.Move(dQInfoFileName + ".csv", dQInfoFileName + ".csv.BAK");
 				}
-				region.Text = darAlQuranInfo.Region;
-				dQName.Text = darAlQuranInfo.DQName;
-				dQManager.Text = darAlQuranInfo.DQManager;
-				doEManager.Text = darAlQuranInfo.DoEManager;
 			}
-			catch (Exception)
+			else
 			{
-				message.BackColor = errorColor;
-				message.Text = "خطا در بارگزاری اطلاعات دارالقرآن";
+				message.BackColor = noticeColor;
+				message.Text += "فایل اطلاعات دار القرآن یافت نشد. نرم افزار فایل را به طور خودکار ایجاد خواهد کرد.\n";
 			}
 
-			try
+			if (File.Exists(studentsFileName + ".csv"))
 			{
-				using (StreamReader reader = new StreamReader("students.csv"))
-				using (CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+				try
 				{
-					students = csv.GetRecords<Student>().ToList();
-				}
+					using (StreamReader reader = new StreamReader(studentsFileName + ".csv"))
+					using (CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+					{
+						students = csv.GetRecords<Student>().ToList();
+					}
 
-				foreach (Student student in students) studentName.Items.Add(student.Name);
-				message.BackColor = defaultColor;
-				message.Text += "\nلیست و مشخصات قرآن آموزان با موفقیت بارگذاری شد.";
+					foreach (Student student in students) studentName.Items.Add(student.Name);
+
+					studentName.SelectedIndex = 0;
+				}
+				catch (Exception)
+				{
+					message.BackColor = errorColor;
+					message.Text += "خطا در بارگزاری اطلاعات قرآن آموزان. لطفا اطلاعات را دستی وارد کنید.";
+					studentName.Items.Clear();
+
+					if (File.Exists(studentsFileName + ".csv.BAK"))
+					{
+						int count = 1;
+						while (File.Exists(studentsFileName + count.ToString() + ".csv.BAK")) count++;
+
+						File.Move(studentsFileName + ".csv", studentsFileName + count.ToString() + ".csv.BAK");
+					}
+					else File.Move(studentsFileName + ".csv", studentsFileName + ".csv.BAK");
+				} 
 			}
-			catch (Exception)
+			else
 			{
-				message.BackColor = errorColor;
-				message.Text = "خطا در بارگزاری اطلاعات قرآن آموزان";
-				studentName.Items.Clear();
+				message.BackColor = noticeColor;
+				message.Text += "فایل اطلاعات قرآن آموزان یافت نشد. نرم افزار فایل را به طور خودکار ایجاد خواهد کرد.";
 			}
 		}
 
@@ -302,7 +343,9 @@ namespace DarAlQuranLicense
 				students.Add(new Student { Name = studentName.Text, FatherName = fatherName.Text, Code = studentCode.Text });
 			}
 
-			using (StreamWriter writer = new StreamWriter("students.csv"))
+			if (!File.Exists(studentsFileName + ".csv")) File.Create(studentsFileName + ".csv");
+
+			using (StreamWriter writer = new StreamWriter(studentsFileName + ".csv"))
 			using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
 			{
 				csv.WriteRecords(students);
@@ -364,7 +407,9 @@ namespace DarAlQuranLicense
 			darAlQuranInfo.DQManager = dQManager.Text;
 			darAlQuranInfo.DoEManager = doEManager.Text;
 
-			using (StreamWriter writer = new StreamWriter("info.csv"))
+			if (!File.Exists(dQInfoFileName + ".csv")) File.Create(dQInfoFileName + ".csv");
+
+			using (StreamWriter writer = new StreamWriter(dQInfoFileName + ".csv"))
 			using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
 			{
 				List<DarAlQuranInfo> records = new List<DarAlQuranInfo> { darAlQuranInfo };
@@ -410,8 +455,6 @@ namespace DarAlQuranLicense
 
 				if (notFound)
 				{
-					message.BackColor = warningColor;
-					message.Text = "توجه: عکس قرآن آموز یافت نشد.";
 					studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
 					studentPicture.Image = NAImage;
 					return; 
@@ -655,8 +698,10 @@ namespace DarAlQuranLicense
 						File.Delete(picturePath);
 					}
 					studentName.Text = fatherName.Text = studentCode.Text = "";
+
+					if (!File.Exists(studentsFileName + ".csv")) File.Create(studentsFileName + ".csv");
 					
-					using (StreamWriter writer = new StreamWriter("students.csv"))
+					using (StreamWriter writer = new StreamWriter(studentsFileName + ".csv"))
 					using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
 					{
 						csv.WriteRecords(students);
@@ -668,7 +713,7 @@ namespace DarAlQuranLicense
 						studentName.Items.Add(st.Name);
 					}
 
-					message.BackColor = defaultColor;
+					message.BackColor = noticeColor;
 					message.Text = "قرآن آموز حذف شد.";
 					return;
 				}
