@@ -57,7 +57,7 @@ namespace DarAlQuranLicense
 			public string Code { get; set; }
 		}
 
-		private readonly List<Student> students;
+		private readonly List<Student> students = new List<Student>();
 
 		private class DarAlQuranInfo
 		{
@@ -69,7 +69,7 @@ namespace DarAlQuranLicense
 			public string DoEManager { get; set; }
 		}
 
-		private readonly DarAlQuranInfo darAlQuranInfo;
+		private readonly DarAlQuranInfo darAlQuranInfo = new DarAlQuranInfo();
 
 		private readonly PersianCalendar persianCalendar = new PersianCalendar();
 
@@ -173,7 +173,7 @@ namespace DarAlQuranLicense
 			else
 			{
 				message.BackColor = noticeColor;
-				message.Text += "فایل اطلاعات دار القرآن یافت نشد. نرم افزار فایل را به طور خودکار ایجاد خواهد کرد.\n";
+				message.Text = "فایل اطلاعات دار القرآن یافت نشد. نرم افزار فایل را به طور خودکار ایجاد خواهد کرد.\n";
 			}
 
 			if (File.Exists(studentsFileName + ".csv"))
@@ -407,7 +407,7 @@ namespace DarAlQuranLicense
 			darAlQuranInfo.DQManager = dQManager.Text;
 			darAlQuranInfo.DoEManager = doEManager.Text;
 
-			if (!File.Exists(dQInfoFileName + ".csv")) File.Create(dQInfoFileName + ".csv");
+			if (!File.Exists(dQInfoFileName + ".csv")) File.Create(dQInfoFileName + ".csv").Dispose();
 
 			using (StreamWriter writer = new StreamWriter(dQInfoFileName + ".csv"))
 			using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
@@ -699,7 +699,7 @@ namespace DarAlQuranLicense
 					}
 					studentName.Text = fatherName.Text = studentCode.Text = "";
 
-					if (!File.Exists(studentsFileName + ".csv")) File.Create(studentsFileName + ".csv");
+					if (!File.Exists(studentsFileName + ".csv")) File.Create(studentsFileName + ".csv").Dispose();
 					
 					using (StreamWriter writer = new StreamWriter(studentsFileName + ".csv"))
 					using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
