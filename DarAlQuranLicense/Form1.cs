@@ -343,12 +343,19 @@ namespace DarAlQuranLicense
 				students.Add(new Student { Name = studentName.Text, FatherName = fatherName.Text, Code = studentCode.Text });
 			}
 
-			if (!File.Exists(studentsFileName + ".csv")) File.Create(studentsFileName + ".csv");
-
-			using (StreamWriter writer = new StreamWriter(studentsFileName + ".csv"))
-			using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+			try
 			{
-				csv.WriteRecords(students);
+				if (!File.Exists(studentsFileName + ".csv")) File.Create(studentsFileName + ".csv");
+				using (StreamWriter writer = new StreamWriter(studentsFileName + ".csv"))
+				using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+				{
+					csv.WriteRecords(students);
+				}
+			}
+			catch (Exception)
+			{
+				message.BackColor = errorColor;
+				message.Text = "خطا هنگام ذخیره سازی اطلاعات قرآن آموز";
 			}
 
 			studentName.Items.Clear();
@@ -407,13 +414,21 @@ namespace DarAlQuranLicense
 			darAlQuranInfo.DQManager = dQManager.Text;
 			darAlQuranInfo.DoEManager = doEManager.Text;
 
-			if (!File.Exists(dQInfoFileName + ".csv")) File.Create(dQInfoFileName + ".csv").Dispose();
 
-			using (StreamWriter writer = new StreamWriter(dQInfoFileName + ".csv"))
-			using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+			try
 			{
-				List<DarAlQuranInfo> records = new List<DarAlQuranInfo> { darAlQuranInfo };
-				csv.WriteRecords(records);
+				if (!File.Exists(dQInfoFileName + ".csv")) File.Create(dQInfoFileName + ".csv").Dispose();
+				using (StreamWriter writer = new StreamWriter(dQInfoFileName + ".csv"))
+				using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+				{
+					List<DarAlQuranInfo> records = new List<DarAlQuranInfo> { darAlQuranInfo };
+					csv.WriteRecords(records);
+				}
+			}
+			catch (Exception)
+			{
+				message.BackColor = errorColor;
+				message.Text = "خطا هنگام ذخیره سازی اطلاعات دارالقرآن";
 			}
 		}
 
@@ -699,12 +714,17 @@ namespace DarAlQuranLicense
 					}
 					studentName.Text = fatherName.Text = studentCode.Text = "";
 
-					if (!File.Exists(studentsFileName + ".csv")) File.Create(studentsFileName + ".csv").Dispose();
-					
-					using (StreamWriter writer = new StreamWriter(studentsFileName + ".csv"))
-					using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+					try
 					{
-						csv.WriteRecords(students);
+						using (StreamWriter writer = new StreamWriter(studentsFileName + ".csv"))
+						using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+						{
+							csv.WriteRecords(students);
+						}
+					}
+					catch (Exception)
+					{
+						break;
 					}
 
 					studentName.Items.Clear();
@@ -719,7 +739,7 @@ namespace DarAlQuranLicense
 				}
 			}
 			message.BackColor = errorColor;
-			message.Text = "خطا در حذف قرآن آموز";
+			message.Text = "خطا هنگام حذف قرآن آموز";
 		}
 
 		private void ChangePicture_Click(object sender, EventArgs e)
