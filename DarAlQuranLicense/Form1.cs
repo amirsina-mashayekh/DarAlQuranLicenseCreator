@@ -16,6 +16,16 @@ namespace DarAlQuranLicense
 {
 	public partial class MainForm : Form
 	{
+		private readonly Color defaultColor = SystemColors.Control;
+
+		private readonly Color errorColor = Color.IndianRed;
+		
+		private readonly Color successColor = Color.Green;
+		
+		private readonly Color warningColor = Color.LightYellow;
+		
+		private readonly Color noticeColor = Color.LightSkyBlue;
+
 		[System.Runtime.InteropServices.DllImport("gdi32.dll")]
 		private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
 			IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
@@ -138,7 +148,7 @@ namespace DarAlQuranLicense
 			}
 			catch (Exception)
 			{
-				message.BackColor = Color.IndianRed;
+				message.BackColor = errorColor;
 				message.Text = "خطا در بارگزاری اطلاعات دارالقرآن";
 			}
 
@@ -151,12 +161,12 @@ namespace DarAlQuranLicense
 				}
 
 				foreach (Student student in students) studentName.Items.Add(student.Name);
-				message.BackColor = SystemColors.Control;
-				message.Text = "لیست و مشخصات قرآن آموزان با موفقیت بارگذاری شد.";
+				message.BackColor = defaultColor;
+				message.Text += "\nلیست و مشخصات قرآن آموزان با موفقیت بارگذاری شد.";
 			}
 			catch (Exception)
 			{
-				message.BackColor = Color.IndianRed;
+				message.BackColor = errorColor;
 				message.Text = "خطا در بارگزاری اطلاعات قرآن آموزان";
 				studentName.Items.Clear();
 			}
@@ -323,7 +333,7 @@ namespace DarAlQuranLicense
 			}
 			catch (Exception)
 			{
-				message.BackColor = Color.IndianRed;
+				message.BackColor = errorColor;
 				message.Text = "خطا در بارگذاری عکس قرآن آموز.";
 				studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
 				studentPicture.Image = ErrorImage;
@@ -333,7 +343,7 @@ namespace DarAlQuranLicense
 			float ratio = image.Width / (float)image.Height;
 			if (ratio > 0.8 || ratio < 0.7)
 			{
-				message.BackColor = Color.IndianRed;
+				message.BackColor = errorColor;
 				message.Text = "نسبت عرض به ارتفاع عکس قرآن آموز باید بین ۰/۷ و ۰/۸ (سه در چهار) باشد.";
 				studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
 				studentPicture.Image = ErrorImage;
@@ -400,7 +410,7 @@ namespace DarAlQuranLicense
 
 				if (notFound)
 				{
-					message.BackColor = Color.LightYellow;
+					message.BackColor = warningColor;
 					message.Text = "توجه: عکس قرآن آموز یافت نشد.";
 					studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
 					studentPicture.Image = NAImage;
@@ -414,7 +424,7 @@ namespace DarAlQuranLicense
 				}
 				catch (Exception)
 				{
-					message.BackColor = Color.IndianRed;
+					message.BackColor = errorColor;
 					message.Text = "خطا در بارگذاری عکس قرآن آموز.";
 					studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
 					studentPicture.Image = ErrorImage;
@@ -429,7 +439,7 @@ namespace DarAlQuranLicense
 			{
 				studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
 				studentPicture.Image = DefaultImage;
-				message.BackColor = SystemColors.Control;
+				message.BackColor = defaultColor;
 				message.Clear();
 				if (studentName.Text == "" && studentCode.Text == "")
 				{
@@ -509,7 +519,7 @@ namespace DarAlQuranLicense
 				}
 				catch (Exception)
 				{
-					message.BackColor = Color.IndianRed;
+					message.BackColor = errorColor;
 					message.Text = "تاریخ وارد شده نامعتبر است.";
 					return;
 				}
@@ -578,11 +588,11 @@ namespace DarAlQuranLicense
 
 				graphics.DrawImage((Bitmap)resourceManager.GetObject("_" + level_background + "b"), 398, 336);
 
-				message.BackColor = Color.Green;
+				message.BackColor = successColor;
 				message.Text = "";
 				if (EmptyFields.Count > 0)
 				{
-					message.BackColor = Color.LightYellow;
+					message.BackColor = warningColor;
 					if (EmptyFields.Count == 1) message.Text = "توجه: مورد «" + EmptyFields[0] + "» خالی است. ";
 					else
 					{
@@ -605,7 +615,7 @@ namespace DarAlQuranLicense
 			}
 			catch (Exception)
 			{
-				message.BackColor = Color.IndianRed;
+				message.BackColor = errorColor;
 				message.Text = "خطا در ایجاد گواهینامه";
 			}
 		}
@@ -625,7 +635,7 @@ namespace DarAlQuranLicense
 			}
 			catch
 			{
-				message.BackColor = Color.IndianRed;
+				message.BackColor = errorColor;
 				message.Text = "خطا در نمایش راهنما";
 			}
 		}
@@ -658,12 +668,12 @@ namespace DarAlQuranLicense
 						studentName.Items.Add(st.Name);
 					}
 
-					message.BackColor = SystemColors.Control;
+					message.BackColor = defaultColor;
 					message.Text = "قرآن آموز حذف شد.";
 					return;
 				}
 			}
-			message.BackColor = Color.IndianRed;
+			message.BackColor = errorColor;
 			message.Text = "خطا در حذف قرآن آموز";
 		}
 
