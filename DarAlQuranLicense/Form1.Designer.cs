@@ -97,7 +97,7 @@
 			this.region.Location = new System.Drawing.Point(418, 6);
 			this.region.Name = "region";
 			this.region.Size = new System.Drawing.Size(129, 28);
-			this.region.TabIndex = 1;
+			this.region.TabIndex = 3;
 			this.region.Leave += new System.EventHandler(this.UpdateDQInfo);
 			// 
 			// cityLabel
@@ -116,7 +116,7 @@
 			this.dQName.Location = new System.Drawing.Point(106, 40);
 			this.dQName.Name = "dQName";
 			this.dQName.Size = new System.Drawing.Size(441, 28);
-			this.dQName.TabIndex = 2;
+			this.dQName.TabIndex = 4;
 			this.dQName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.dQName.Leave += new System.EventHandler(this.UpdateDQInfo);
 			// 
@@ -159,7 +159,7 @@
 			this.number.Location = new System.Drawing.Point(418, 111);
 			this.number.Name = "number";
 			this.number.Size = new System.Drawing.Size(129, 28);
-			this.number.TabIndex = 3;
+			this.number.TabIndex = 8;
 			// 
 			// dQManager
 			// 
@@ -208,7 +208,7 @@
 			this.cityRadioButton.Location = new System.Drawing.Point(246, 6);
 			this.cityRadioButton.Name = "cityRadioButton";
 			this.cityRadioButton.Size = new System.Drawing.Size(90, 26);
-			this.cityRadioButton.TabIndex = 7;
+			this.cityRadioButton.TabIndex = 1;
 			this.cityRadioButton.TabStop = true;
 			this.cityRadioButton.Text = "شهرستان /";
 			this.cityRadioButton.UseVisualStyleBackColor = true;
@@ -222,7 +222,7 @@
 			this.districtRadioButton.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
 			this.districtRadioButton.Name = "districtRadioButton";
 			this.districtRadioButton.Size = new System.Drawing.Size(64, 26);
-			this.districtRadioButton.TabIndex = 8;
+			this.districtRadioButton.TabIndex = 2;
 			this.districtRadioButton.Text = "منطقه";
 			this.districtRadioButton.UseVisualStyleBackColor = true;
 			this.districtRadioButton.CheckedChanged += new System.EventHandler(this.UpdateDQInfo);
@@ -251,7 +251,7 @@
 			this.studentInfoBox.Location = new System.Drawing.Point(12, 145);
 			this.studentInfoBox.Name = "studentInfoBox";
 			this.studentInfoBox.Size = new System.Drawing.Size(535, 284);
-			this.studentInfoBox.TabIndex = 12;
+			this.studentInfoBox.TabIndex = 9;
 			this.studentInfoBox.TabStop = false;
 			this.studentInfoBox.Text = "مشخصات قرآن آموز";
 			// 
@@ -275,7 +275,7 @@
 			this.background.Location = new System.Drawing.Point(134, 181);
 			this.background.Name = "background";
 			this.background.Size = new System.Drawing.Size(120, 29);
-			this.background.TabIndex = 36;
+			this.background.TabIndex = 6;
 			this.toolTip.SetToolTip(this.background, "طرح زمینه مورد نظر را انتخاب کنید.");
 			// 
 			// changePicture
@@ -284,7 +284,7 @@
 			this.changePicture.Location = new System.Drawing.Point(211, 248);
 			this.changePicture.Name = "changePicture";
 			this.changePicture.Size = new System.Drawing.Size(86, 30);
-			this.changePicture.TabIndex = 35;
+			this.changePicture.TabIndex = 10;
 			this.changePicture.Text = "تغییر عکس";
 			this.changePicture.UseVisualStyleBackColor = true;
 			this.changePicture.Click += new System.EventHandler(this.ChangePicture_Click);
@@ -295,7 +295,7 @@
 			this.deleteStudent.Location = new System.Drawing.Point(303, 248);
 			this.deleteStudent.Name = "deleteStudent";
 			this.deleteStudent.Size = new System.Drawing.Size(110, 30);
-			this.deleteStudent.TabIndex = 35;
+			this.deleteStudent.TabIndex = 9;
 			this.deleteStudent.Text = "حذف قرآن آموز";
 			this.deleteStudent.UseVisualStyleBackColor = true;
 			this.deleteStudent.Click += new System.EventHandler(this.DeleteStudent_Click);
@@ -306,7 +306,7 @@
 			this.generate.Location = new System.Drawing.Point(419, 248);
 			this.generate.Name = "generate";
 			this.generate.Size = new System.Drawing.Size(110, 30);
-			this.generate.TabIndex = 35;
+			this.generate.TabIndex = 8;
 			this.generate.Text = "ایجاد گواهینامه";
 			this.generate.UseVisualStyleBackColor = true;
 			this.generate.Click += new System.EventHandler(this.Generate_Click);
@@ -321,7 +321,7 @@
 			this.dateCheckBox.Location = new System.Drawing.Point(318, 216);
 			this.dateCheckBox.Name = "dateCheckBox";
 			this.dateCheckBox.Size = new System.Drawing.Size(211, 26);
-			this.dateCheckBox.TabIndex = 8;
+			this.dateCheckBox.TabIndex = 7;
 			this.dateCheckBox.Text = "سال به صورت دو رقمی درج شود.";
 			this.toolTip.SetToolTip(this.dateCheckBox, "برای مثال ۰۱ به جای ۱۴۰۱");
 			this.dateCheckBox.UseVisualStyleBackColor = true;
@@ -360,7 +360,7 @@
 			this.licenseText.Location = new System.Drawing.Point(6, 131);
 			this.licenseText.Name = "licenseText";
 			this.licenseText.Size = new System.Drawing.Size(331, 28);
-			this.licenseText.TabIndex = 6;
+			this.licenseText.TabIndex = 4;
 			// 
 			// customLicenseText
 			// 
@@ -368,7 +368,7 @@
 			this.customLicenseText.Location = new System.Drawing.Point(363, 131);
 			this.customLicenseText.Name = "customLicenseText";
 			this.customLicenseText.Size = new System.Drawing.Size(106, 28);
-			this.customLicenseText.TabIndex = 6;
+			this.customLicenseText.TabIndex = 3;
 			// 
 			// score
 			// 
@@ -383,7 +383,7 @@
 			this.score.Location = new System.Drawing.Point(349, 181);
 			this.score.Name = "score";
 			this.score.Size = new System.Drawing.Size(125, 29);
-			this.score.TabIndex = 7;
+			this.score.TabIndex = 5;
 			// 
 			// studentName
 			// 
@@ -478,7 +478,7 @@
 			this.message.Name = "message";
 			this.message.ReadOnly = true;
 			this.message.Size = new System.Drawing.Size(454, 45);
-			this.message.TabIndex = 35;
+			this.message.TabIndex = 10;
 			this.toolTip.SetToolTip(this.message, "پیغام نرم افزار");
 			// 
 			// toolTip
@@ -493,7 +493,7 @@
 			this.helpButton.Location = new System.Drawing.Point(472, 444);
 			this.helpButton.Name = "helpButton";
 			this.helpButton.Size = new System.Drawing.Size(75, 30);
-			this.helpButton.TabIndex = 13;
+			this.helpButton.TabIndex = 11;
 			this.helpButton.Text = "راهنما";
 			this.helpButton.UseVisualStyleBackColor = true;
 			this.helpButton.Click += new System.EventHandler(this.HelpButton_Click);
@@ -506,7 +506,7 @@
 			this.date.Name = "date";
 			this.date.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.date.Size = new System.Drawing.Size(134, 28);
-			this.date.TabIndex = 36;
+			this.date.TabIndex = 7;
 			this.date.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// MainForm
@@ -515,8 +515,8 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(559, 486);
-			this.Controls.Add(this.cityLabel);
 			this.Controls.Add(this.districtRadioButton);
+			this.Controls.Add(this.cityLabel);
 			this.Controls.Add(this.cityRadioButton);
 			this.Controls.Add(this.date);
 			this.Controls.Add(this.message);
