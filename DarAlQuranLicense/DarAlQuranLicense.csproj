@@ -110,10 +110,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Resources\Samim.ttf" />
-    <EmbeddedResource Include="Resources\IranNastaliq.ttf" />
     <EmbeddedResource Include="Resources\BKoodak.ttf" />
     <EmbeddedResource Include="Resources\BNazanin.ttf" />
     <EmbeddedResource Include="Resources\Help.pdf" />
+    <EmbeddedResource Include="Resources\IranNastaliq-Web.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

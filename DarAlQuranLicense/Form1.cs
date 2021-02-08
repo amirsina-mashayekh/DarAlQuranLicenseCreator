@@ -79,7 +79,7 @@ namespace DarAlQuranLicense
 		{
 
 			uint temp = 0;
-			byte[][] fontData = new byte[][] { Properties.Resources.Samim, Properties.Resources.IranNastaliq,
+			byte[][] fontData = new byte[][] { Properties.Resources.Samim, Properties.Resources.IranNastaliq_Web,
 				Properties.Resources.BNazanin, Properties.Resources.BKoodak };
 
 			for (int i = 0; i < fontData.Length; i++)
@@ -286,6 +286,8 @@ namespace DarAlQuranLicense
 				x -= stringSize.Width;
 
 			graphics.DrawString(text, font, brush, x, y, stringFormat);
+			//Point point = new Point((int)x, (int)y);
+			//TextRenderer.DrawText(graphics, text, font, point, ((SolidBrush)brush).Color, TextFormatFlags.RightToLeft);
 		}
 
 		private static Bitmap ResizeImage(Image image, int width, int height)

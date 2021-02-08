@@ -293,9 +293,9 @@ namespace DarAlQuranLicense.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] IranNastaliq {
+        internal static byte[] IranNastaliq_Web {
             get {
-                object obj = ResourceManager.GetObject("IranNastaliq", resourceCulture);
+                object obj = ResourceManager.GetObject("IranNastaliq_Web", resourceCulture);
                 return ((byte[])(obj));
             }
         }
