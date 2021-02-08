@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("گواهینامه دارالقرآن")]
+[assembly: AssemblyTitle("Dar Al Quran License Creator")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("گواهینامه دارالقرآن")]
-[assembly: AssemblyCopyright("Copyright ©  2021 AmirSina Mashayekh")]
+[assembly: AssemblyProduct("Dar Al Quran License Creator")]
+[assembly: AssemblyCopyright("Copyright © 2021 AmirSina Mashayekh")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
