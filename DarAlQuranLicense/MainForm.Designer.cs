@@ -281,9 +281,9 @@
 			// changePicture
 			// 
 			this.changePicture.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-			this.changePicture.Location = new System.Drawing.Point(211, 248);
+			this.changePicture.Location = new System.Drawing.Point(187, 248);
 			this.changePicture.Name = "changePicture";
-			this.changePicture.Size = new System.Drawing.Size(86, 30);
+			this.changePicture.Size = new System.Drawing.Size(110, 30);
 			this.changePicture.TabIndex = 10;
 			this.changePicture.Text = "تغییر عکس";
 			this.changePicture.UseVisualStyleBackColor = true;

@@ -195,7 +195,7 @@ namespace DarAlQuranLicense
 				catch (Exception)
 				{
 					message.BackColor = errorColor;
-					message.Text += "خطا در بارگزاری اطلاعات قرآن آموزان. لطفا اطلاعات را دستی وارد کنید.";
+					message.Text += "خطا در بارگزاری اطلاعات قرآن آموزان. لطفا اطلاعات را دستی وارد کنید." + Environment.NewLine;
 					studentName.Items.Clear();
 
 					if (File.Exists(studentsFileName + ".csv.BAK"))
@@ -408,6 +408,7 @@ namespace DarAlQuranLicense
 			studentPicture.SizeMode = PictureBoxSizeMode.StretchImage;
 			studentPicture.Image = ResizeImage(image, 285, 380);
 			hasPicture = true;
+			changePicture.Enabled = true;
 			studentPicture.Image.Save(picturesPath + "/" + studentCode.Text.EnglishNumbersToPersian() + ".jpg", ImageFormat.Jpeg);
 		}
 
@@ -476,6 +477,7 @@ namespace DarAlQuranLicense
 			}
 
 			hasPicture = false;
+			changePicture.Enabled = false;
 
 			if (studentCode.Text.Length > 0)
 			{
@@ -516,6 +518,7 @@ namespace DarAlQuranLicense
 				studentPicture.SizeMode = PictureBoxSizeMode.StretchImage;
 				studentPicture.Image = image;
 				hasPicture = true;
+				changePicture.Enabled = true;
 			}
 			else
 			{
@@ -533,6 +536,8 @@ namespace DarAlQuranLicense
 
 		private void Generate_Click(object sender, EventArgs e)
 		{
+			message.Text = "";
+
 			try
 			{
 				ResourceManager resourceManager = Properties.Resources.ResourceManager;
@@ -602,7 +607,7 @@ namespace DarAlQuranLicense
 				catch (Exception)
 				{
 					message.BackColor = errorColor;
-					message.Text = "تاریخ وارد شده نامعتبر است.";
+					message.Text = "تاریخ وارد شده نامعتبر است." + Environment.NewLine;
 					return;
 				}
 				string prevYear = (int.Parse(splittedDate[0]) - 1).ToString();
@@ -671,14 +676,13 @@ namespace DarAlQuranLicense
 				graphics.DrawImage((Bitmap)resourceManager.GetObject("_" + level_background + "b"), 398, 336);
 
 				message.BackColor = successColor;
-				message.Text = "";
 				if (EmptyFields.Count > 0)
 				{
 					message.BackColor = warningColor;
-					if (EmptyFields.Count == 1) message.Text = "توجه: مورد «" + EmptyFields[0] + "» خالی است. ";
+					if (EmptyFields.Count == 1) message.Text += "توجه: مورد «" + EmptyFields[0] + "» خالی است. ";
 					else
 					{
-						message.Text = "توجه: موارد «";
+						message.Text += "توجه: موارد «";
 						for (int i = 0; i < EmptyFields.Count; i++)
 						{
 							message.Text += EmptyFields[i];
@@ -698,7 +702,7 @@ namespace DarAlQuranLicense
 			catch (Exception)
 			{
 				message.BackColor = errorColor;
-				message.Text = "خطا در ایجاد گواهینامه";
+				message.Text = "خطا در ایجاد گواهینامه" + Environment.NewLine;
 			}
 		}
 
@@ -718,7 +722,7 @@ namespace DarAlQuranLicense
 			catch
 			{
 				message.BackColor = errorColor;
-				message.Text = "خطا در نمایش راهنما";
+				message.Text = "خطا در نمایش راهنما" + Environment.NewLine;
 			}
 		}
 
@@ -763,7 +767,7 @@ namespace DarAlQuranLicense
 				}
 			}
 			message.BackColor = errorColor;
-			message.Text = "خطا هنگام حذف قرآن آموز";
+			message.Text = "خطا هنگام حذف قرآن آموز" + Environment.NewLine;
 		}
 
 		private void ChangePicture_Click(object sender, EventArgs e)
