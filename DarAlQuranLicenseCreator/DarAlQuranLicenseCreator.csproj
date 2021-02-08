@@ -7,7 +7,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C284A20C-0547-4F74-88A5-A1D1B9DA9491}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>DarAlQuranLicense</RootNamespace>
+    <RootNamespace>DarAlQuranLicenseCreator</RootNamespace>
     <AssemblyName>گواهینامه دارالقرآن</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -38,7 +38,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>DarAlQuranLicense.Program</StartupObject>
+    <StartupObject>DarAlQuranLicenseCreator.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace DarAlQuranLicense
+namespace DarAlQuranLicenseCreator
 {
 	internal static class Program
 	{

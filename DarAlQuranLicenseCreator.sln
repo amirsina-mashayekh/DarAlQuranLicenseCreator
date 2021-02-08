@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DarAlQuranLicense", "DarAlQuranLicense\DarAlQuranLicense.csproj", "{C284A20C-0547-4F74-88A5-A1D1B9DA9491}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DarAlQuranLicenseCreator", "DarAlQuranLicenseCreator\DarAlQuranLicenseCreator.csproj", "{C284A20C-0547-4F74-88A5-A1D1B9DA9491}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("گواهینامه دارالقرآن")]
-[assembly: AssemblyCopyright("Copyright ©  2020 AmirSina Mashayekh")]
+[assembly: AssemblyCopyright("Copyright ©  2021 AmirSina Mashayekh")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -1,4 +1,4 @@
-﻿namespace DarAlQuranLicense
+﻿namespace DarAlQuranLicenseCreator
 {
 	partial class MainForm
 	{

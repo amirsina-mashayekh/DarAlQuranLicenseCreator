@@ -12,7 +12,7 @@ using System.Resources;
 using System.Windows.Forms;
 using CsvHelper;
 
-namespace DarAlQuranLicense
+namespace DarAlQuranLicenseCreator
 {
 	public partial class MainForm : Form
 	{
