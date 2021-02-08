@@ -106,15 +106,15 @@ namespace DarAlQuranLicense
 			Font = new Font(Samim, Font.Size);
 
 
-			DefaultImage = ConvertTextToImage("عکس\nقرآن آموز", Samim, 50, FontStyle.Regular,
+			DefaultImage = ConvertTextToImage("عکس" + Environment.NewLine + "قرآن آموز", Samim, 50, FontStyle.Regular,
 				new StringFormat { Alignment = StringAlignment.Center, FormatFlags = StringFormatFlags.DirectionRightToLeft },
 				studentPicture.Width, studentPicture.Height, 72, 72, Color.Transparent, Color.SlateGray);
 
-			NAImage = ConvertTextToImage("عکس\nقرآن آموز\nیافت نشد!", Samim, 50, FontStyle.Regular,
+			NAImage = ConvertTextToImage("عکس" + Environment.NewLine + "قرآن آموز" + Environment.NewLine + "یافت نشد!", Samim, 50, FontStyle.Regular,
 				new StringFormat { Alignment = StringAlignment.Center, FormatFlags = StringFormatFlags.DirectionRightToLeft },
 				studentPicture.Width, studentPicture.Height, 72, 72, Color.Transparent, Color.SlateGray);
 
-			ErrorImage = ConvertTextToImage("خطا در\nبارگذاری\nعکس\nقرآن آموز!", Samim, 50, FontStyle.Regular,
+			ErrorImage = ConvertTextToImage("خطا در" + Environment.NewLine + "بارگذاری" + Environment.NewLine + "عکس" + Environment.NewLine + "قرآن آموز!", Samim, 50, FontStyle.Regular,
 				new StringFormat { Alignment = StringAlignment.Center, FormatFlags = StringFormatFlags.DirectionRightToLeft },
 				studentPicture.Width, studentPicture.Height, 72, 72, Color.Transparent, Color.SlateGray);
 
@@ -155,7 +155,7 @@ namespace DarAlQuranLicense
 				catch (Exception)
 				{
 					message.BackColor = errorColor;
-					message.Text = "خطا در بارگزاری اطلاعات دارالقرآن. لطفا اطلاعات را دستی وارد کنید.\n";
+					message.Text = "خطا در بارگزاری اطلاعات دارالقرآن. لطفا اطلاعات را دستی وارد کنید." + Environment.NewLine;
 
 					if (File.Exists(dQInfoFileName + ".csv.BAK"))
 					{
@@ -173,7 +173,7 @@ namespace DarAlQuranLicense
 			else
 			{
 				message.BackColor = noticeColor;
-				message.Text = "فایل اطلاعات دار القرآن یافت نشد. نرم افزار فایل را به طور خودکار ایجاد خواهد کرد.\n";
+				message.Text = "فایل اطلاعات دارالقرآن یافت نشد. نرم افزار فایل را به طور خودکار ایجاد خواهد کرد." + Environment.NewLine;
 			}
 
 			if (File.Exists(studentsFileName + ".csv"))
