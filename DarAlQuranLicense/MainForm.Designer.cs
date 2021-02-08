@@ -387,7 +387,6 @@
 			// 
 			// studentName
 			// 
-			this.studentName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
 			this.studentName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
 			this.studentName.Font = new System.Drawing.Font("Samim", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
 			this.studentName.FormattingEnabled = true;

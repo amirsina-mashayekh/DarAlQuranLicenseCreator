@@ -440,14 +440,29 @@ namespace DarAlQuranLicense
 
 		private void ShowStudentInfo(object sender, EventArgs e)
 		{
-			message.Text = "";
-
 			if (students != null)
 			{
+				int lastSameNameIndex = -1;
 				foreach (Student student in students)
 				{
-					if ((sender == studentName && studentName.Text == student.Name)
-						|| (sender == studentCode && studentCode.Text.PersianNumbersToEnglish() == student.Code.PersianNumbersToEnglish()))
+					bool skip = false;
+
+					if (sender == studentName && studentName.Text == student.Name)
+					{
+						for (int i = lastSameNameIndex + 1; i < studentName.SelectedIndex; i++)
+						{
+							if (studentName.Items[i].ToString() == student.Name)
+							{
+								skip = true;
+								lastSameNameIndex = i;
+								break;
+							}
+						}
+						if (skip) continue;
+					}
+					
+					if ((sender == studentName && studentName.Text == student.Name) ||
+						(sender == studentCode && studentCode.Text.PersianNumbersToEnglish() == student.Code.PersianNumbersToEnglish()))
 					{
 						studentName.Text = student.Name;
 						fatherName.Text = student.FatherName;
