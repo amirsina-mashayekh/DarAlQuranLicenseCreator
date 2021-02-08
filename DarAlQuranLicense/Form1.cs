@@ -29,6 +29,8 @@ namespace DarAlQuranLicense
 		private const string studentsFileName = "students";
 		
 		private const string dQInfoFileName = "info";
+		
+		private const string picturesPath = "pictures";
 
 		[System.Runtime.InteropServices.DllImport("gdi32.dll")]
 		private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
@@ -57,7 +59,7 @@ namespace DarAlQuranLicense
 			public string Code { get; set; }
 		}
 
-		private readonly List<Student> students = new List<Student>();
+		private List<Student> students = new List<Student>();
 
 		private class DarAlQuranInfo
 		{
@@ -345,6 +347,8 @@ namespace DarAlQuranLicense
 				students.Add(new Student { Name = studentName.Text, FatherName = fatherName.Text, Code = studentCode.Text });
 			}
 
+			students = students.OrderBy(o => o.Code).ToList();
+
 			try
 			{
 				if (!File.Exists(studentsFileName + ".csv")) File.Create(studentsFileName + ".csv");
@@ -357,7 +361,7 @@ namespace DarAlQuranLicense
 			catch (Exception)
 			{
 				message.BackColor = errorColor;
-				message.Text = "خطا هنگام ذخیره سازی اطلاعات قرآن آموز";
+				message.Text = "خطا هنگام ذخیره سازی اطلاعات قرآن آموز" + Environment.NewLine;
 			}
 
 			studentName.Items.Clear();
@@ -386,7 +390,7 @@ namespace DarAlQuranLicense
 			catch (Exception)
 			{
 				message.BackColor = errorColor;
-				message.Text = "خطا در بارگذاری عکس قرآن آموز.";
+				message.Text = "خطا در بارگذاری عکس قرآن آموز." + Environment.NewLine;
 				studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
 				studentPicture.Image = ErrorImage;
 				return;
@@ -396,7 +400,7 @@ namespace DarAlQuranLicense
 			if (ratio > 0.8 || ratio < 0.7)
 			{
 				message.BackColor = errorColor;
-				message.Text = "نسبت عرض به ارتفاع عکس قرآن آموز باید بین ۰/۷ و ۰/۸ (سه در چهار) باشد.";
+				message.Text = "نسبت عرض به ارتفاع عکس قرآن آموز باید بین ۰/۷ و ۰/۸ (سه در چهار) باشد." + Environment.NewLine;
 				studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
 				studentPicture.Image = ErrorImage;
 				return;
@@ -404,7 +408,7 @@ namespace DarAlQuranLicense
 			studentPicture.SizeMode = PictureBoxSizeMode.StretchImage;
 			studentPicture.Image = ResizeImage(image, 285, 380);
 			hasPicture = true;
-			studentPicture.Image.Save("pictures/" + studentCode.Text.EnglishNumbersToPersian() + ".jpg", ImageFormat.Jpeg);
+			studentPicture.Image.Save(picturesPath + "/" + studentCode.Text.EnglishNumbersToPersian() + ".jpg", ImageFormat.Jpeg);
 		}
 
 		private void UpdateDQInfo(object sender, EventArgs e)
@@ -454,11 +458,11 @@ namespace DarAlQuranLicense
 			}
 
 			hasPicture = false;
-			if (!Directory.Exists("pictures")) Directory.CreateDirectory("pictures");
 
 			if (studentCode.Text.Length > 0)
 			{
-				string[] files = Directory.GetFiles("pictures");
+				if (!Directory.Exists(picturesPath)) Directory.CreateDirectory(picturesPath);
+				string[] files = Directory.GetFiles(picturesPath);
 				string path = "";
 				bool notFound = true;
 				foreach (string file in files)
@@ -552,7 +556,7 @@ namespace DarAlQuranLicense
 				if (region.Text.Length > 0)
 				{
 					FitAndDrawString("اداره آموزش و پرورش " + (cityRadioButton.Checked ? "شهرستان " : "منطقه ") + region.Text, IranNastaliq32, RTLC, BlackBrush, ref graphics, bitmap.Width / 2, 540);
-					FitAndDrawString("منطقه / شهرستان " + region.Text, BNazanin37, RTLC, BlackBrush, ref graphics, 1175, 3025 - 15, 700);
+					FitAndDrawString("منطقه / شهرستان " + region.Text, BNazanin37, RTLC, BlackBrush, ref graphics, 1175, 3030 - 15, 700);
 				}
 				else EmptyFields.Add("شهرستان");
 
@@ -670,8 +674,8 @@ namespace DarAlQuranLicense
 				string dir = Path.Combine("گواهینامه‌ها", date.Text.Split('/')[0].EnglishNumbersToPersian(), monthString, licenseText.Text);
 				if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 				bitmap.Save(Path.Combine(dir, studentName.Text + "(" + studentCode.Text.EnglishNumbersToPersian() + ").jpg"), ImageFormat.Jpeg);
-				message.Text += "گواهینامه با موفقیت ایجاد شد.";
 				UpdateStudents();
+				message.Text += "گواهینامه با موفقیت ایجاد شد.";
 			}
 			catch (Exception)
 			{
@@ -707,7 +711,7 @@ namespace DarAlQuranLicense
 				if (student.Code == studentCode.Text)
 				{
 					students.Remove(student);
-					string picturePath = "pictures/" + studentCode.Text.EnglishNumbersToPersian() + ".jpg";
+					string picturePath = picturesPath + "/" + studentCode.Text.EnglishNumbersToPersian() + ".jpg";
 					if (File.Exists(picturePath))
 					{
 						studentPicture.SizeMode = PictureBoxSizeMode.CenterImage;
