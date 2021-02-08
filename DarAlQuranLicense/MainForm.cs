@@ -351,7 +351,7 @@ namespace DarAlQuranLicense
 
 			try
 			{
-				if (!File.Exists(studentsFileName + ".csv")) File.Create(studentsFileName + ".csv");
+				if (!File.Exists(studentsFileName + ".csv")) File.Create(studentsFileName + ".csv").Dispose();
 				using (StreamWriter writer = new StreamWriter(studentsFileName + ".csv"))
 				using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
 				{
@@ -440,6 +440,9 @@ namespace DarAlQuranLicense
 
 		private void ShowStudentInfo(object sender, EventArgs e)
 		{
+			message.BackColor = defaultColor;
+			message.Text = "";
+
 			if (students != null)
 			{
 				int lastSameNameIndex = -1;
