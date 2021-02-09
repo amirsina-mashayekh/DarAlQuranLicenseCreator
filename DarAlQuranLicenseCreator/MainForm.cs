@@ -556,7 +556,7 @@ namespace DarAlQuranLicenseCreator
 
 				SolidBrush BlackBrush = new SolidBrush(Color.Black);
 				SolidBrush BrownBrush = new SolidBrush(Color.FromArgb(137, 24, 28));
-				Font BKoodak31 = new Font(BKoodak, 31);
+				Font BKoodak31 = new Font(BKoodak, 31, FontStyle.Bold);
 				Font IranNastaliq58 = new Font(IranNastaliq, 58);
 				Font IranNastaliq32 = new Font(IranNastaliq, 32);
 				Font BNazanin37 = new Font(BNazanin, 37, FontStyle.Bold);
@@ -699,10 +699,10 @@ namespace DarAlQuranLicenseCreator
 				UpdateStudents();
 				message.Text += "گواهینامه با موفقیت ایجاد شد.";
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
 				message.BackColor = errorColor;
-				message.Text = "خطا در ایجاد گواهینامه" + Environment.NewLine;
+				message.Text = "خطا در ایجاد گواهینامه: " + ex.Message + Environment.NewLine;
 			}
 		}
 
